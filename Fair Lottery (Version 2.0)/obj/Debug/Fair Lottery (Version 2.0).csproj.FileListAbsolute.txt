@@ -1,0 +1,14 @@
+F:\Cloud\Learn\Курсовая работа 3 семестр\Fair Lottery (Version 2.0)\Fair Lottery (Version 2.0)\bin\Debug\Fair Lottery (Version 2.0).exe.config
+F:\Cloud\Learn\Курсовая работа 3 семестр\Fair Lottery (Version 2.0)\Fair Lottery (Version 2.0)\bin\Debug\Fair Lottery (Version 2.0).exe
+F:\Cloud\Learn\Курсовая работа 3 семестр\Fair Lottery (Version 2.0)\Fair Lottery (Version 2.0)\bin\Debug\Fair Lottery (Version 2.0).pdb
+F:\Cloud\Learn\Курсовая работа 3 семестр\Fair Lottery (Version 2.0)\Fair Lottery (Version 2.0)\bin\Debug\System.Data.SQLite.dll
+F:\Cloud\Learn\Курсовая работа 3 семестр\Fair Lottery (Version 2.0)\Fair Lottery (Version 2.0)\bin\Debug\System.Data.SQLite.xml
+F:\Cloud\Learn\Курсовая работа 3 семестр\Fair Lottery (Version 2.0)\Fair Lottery (Version 2.0)\bin\Debug\System.Data.SQLite.dll.config
+F:\Cloud\Learn\Курсовая работа 3 семестр\Fair Lottery (Version 2.0)\Fair Lottery (Version 2.0)\obj\Debug\Fair Lottery (Version 2.0).csprojResolveAssemblyReference.cache
+F:\Cloud\Learn\Курсовая работа 3 семестр\Fair Lottery (Version 2.0)\Fair Lottery (Version 2.0)\obj\Debug\Fair Lottery (Version 2.0).csproj.CoreCompileInputs.cache
+F:\Cloud\Learn\Курсовая работа 3 семестр\Fair Lottery (Version 2.0)\Fair Lottery (Version 2.0)\obj\Debug\Fair Lottery (Version 2.0).exe
+F:\Cloud\Learn\Курсовая работа 3 семестр\Fair Lottery (Version 2.0)\Fair Lottery (Version 2.0)\obj\Debug\Fair Lottery (Version 2.0).pdb
+C:\DiskInDiske\Cloud\programming\Project\Fair Lottery 2.0\Fair Lottery (Version 2.0)\obj\Debug\Fair Lottery (Version 2.0).csprojResolveAssemblyReference.cache
+C:\DiskInDiske\Cloud\programming\Project\Fair Lottery 2.0\Fair Lottery (Version 2.0)\obj\Debug\Fair Lottery (Version 2.0).csproj.CoreCompileInputs.cache
+C:\DiskInDiske\Cloud\programming\Project\Fair Lottery 2.0\Fair Lottery (Version 2.0)\obj\Debug\Fair Lottery (Version 2.0).exe
+C:\DiskInDiske\Cloud\programming\Project\Fair Lottery 2.0\Fair Lottery (Version 2.0)\obj\Debug\Fair Lottery (Version 2.0).pdb
