@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Fair_Lottery.Windows"
         mc:Ignorable="d"
-        Title="Authentication" MaxHeight="500" MaxWidth="800" MinHeight="250" MinWidth="400">
+        Title="Authentication" MaxHeight="600" MaxWidth="900" MinHeight="400" MinWidth="600">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>

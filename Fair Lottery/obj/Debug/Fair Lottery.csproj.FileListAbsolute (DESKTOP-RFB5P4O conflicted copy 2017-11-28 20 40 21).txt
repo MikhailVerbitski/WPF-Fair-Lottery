@@ -1,0 +1,26 @@
+F:\Cloud\programming\Project\Fair Lottery\Fair Lottery\obj\Debug\Fair Lottery.csprojResolveAssemblyReference.cache
+F:\Cloud\programming\Project\Fair Lottery\Fair Lottery\obj\Debug\Windows\Authentication.g.cs
+F:\Cloud\programming\Project\Fair Lottery\Fair Lottery\obj\Debug\Windows\Authorization.g.cs
+F:\Cloud\programming\Project\Fair Lottery\Fair Lottery\obj\Debug\Windows\Hall.g.cs
+F:\Cloud\programming\Project\Fair Lottery\Fair Lottery\obj\Debug\Windows\MainWindow.g.cs
+F:\Cloud\programming\Project\Fair Lottery\Fair Lottery\obj\Debug\Windows\Registration.g.cs
+F:\Cloud\programming\Project\Fair Lottery\Fair Lottery\obj\Debug\App.g.cs
+F:\Cloud\programming\Project\Fair Lottery\Fair Lottery\obj\Debug\Fair Lottery_MarkupCompile.cache
+F:\Cloud\programming\Project\Fair Lottery\Fair Lottery\obj\Debug\Fair Lottery_MarkupCompile.lref
+F:\Cloud\programming\Project\Fair Lottery\Fair Lottery\bin\Debug\Fair Lottery.exe.config
+F:\Cloud\programming\Project\Fair Lottery\Fair Lottery\bin\Debug\Fair Lottery.exe
+F:\Cloud\programming\Project\Fair Lottery\Fair Lottery\bin\Debug\Fair Lottery.pdb
+F:\Cloud\programming\Project\Fair Lottery\Fair Lottery\bin\Debug\System.Data.SQLite.dll
+F:\Cloud\programming\Project\Fair Lottery\Fair Lottery\bin\Debug\System.Data.SQLite.xml
+F:\Cloud\programming\Project\Fair Lottery\Fair Lottery\bin\Debug\System.Data.SQLite.dll.config
+F:\Cloud\programming\Project\Fair Lottery\Fair Lottery\obj\Debug\Windows\Authentication.baml
+F:\Cloud\programming\Project\Fair Lottery\Fair Lottery\obj\Debug\Windows\Authorization.baml
+F:\Cloud\programming\Project\Fair Lottery\Fair Lottery\obj\Debug\Windows\Hall.baml
+F:\Cloud\programming\Project\Fair Lottery\Fair Lottery\obj\Debug\Windows\MainWindow.baml
+F:\Cloud\programming\Project\Fair Lottery\Fair Lottery\obj\Debug\Windows\Registration.baml
+F:\Cloud\programming\Project\Fair Lottery\Fair Lottery\obj\Debug\Fair Lottery.g.resources
+F:\Cloud\programming\Project\Fair Lottery\Fair Lottery\obj\Debug\Fair_Lottery.Properties.Resources.resources
+F:\Cloud\programming\Project\Fair Lottery\Fair Lottery\obj\Debug\Fair Lottery.csproj.GenerateResource.Cache
+F:\Cloud\programming\Project\Fair Lottery\Fair Lottery\obj\Debug\Fair Lottery.csproj.CoreCompileInputs.cache
+F:\Cloud\programming\Project\Fair Lottery\Fair Lottery\obj\Debug\Fair Lottery.exe
+F:\Cloud\programming\Project\Fair Lottery\Fair Lottery\obj\Debug\Fair Lottery.pdb

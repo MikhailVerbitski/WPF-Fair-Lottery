@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Fair_Lottery.Windows"
         mc:Ignorable="d"
-        Title="MainWindow" MaxHeight="500" MaxWidth="800" MinHeight="250" MinWidth="400">
+        Title="MainWindow" MaxHeight="600" MaxWidth="900" MinHeight="400" MinWidth="600">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -17,6 +17,8 @@
             <RowDefinition Height="60"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <Button Grid.Row="1" Grid.Column="1" Content="Click me!" Click="ClickMe"/>
+        <Button Grid.Row="1" Grid.Column="1" Click="ClickMe" Background="White">
+            Click me!
+        </Button>
     </Grid>
 </Window>

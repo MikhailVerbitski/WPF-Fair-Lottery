@@ -27,19 +27,20 @@ namespace Logic
         public static Persone persone;
         public static decimal StartMoney { get { return 100; } }
 
-        static Authentication authentication = new Authentication();
-        static Registration registration = new Registration();
-        static Authorization authorization = new Authorization();
-        static Hall hall = new Hall();
+        public static Authentication Authentication { get; private set; }
+        public static Authorization Authorization { get; private set; }
+        public static Hall Hall { get; private set; }
+        public static Registration Registration { get; private set; }
 
-        public static Authentication Authentication { get { return authentication; } }
-        public static Registration Registration { get { return registration; } }
-        public static Authorization Authorization { get { return authorization; } }
-        public static Hall Hall { get { return hall; } }
+        static Game game;
 
         public static void InitializationLogic()
         {
             Table.ConnectWithDataBase();
+
+            Authentication = new Authentication();
+            Authorization = new Authorization();
+            Registration = new Registration();
         }
         public static void CloseOpen(Window Close, Window Open)
         {

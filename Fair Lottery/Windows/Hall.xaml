@@ -5,36 +5,98 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Fair_Lottery.Windows"
         mc:Ignorable="d"
-        Title="Hall" MaxHeight="500" MaxWidth="800" MinHeight="250" MinWidth="400">
-    <StackPanel>
-        <Label Name="Login" Height="40" Grid.Column="1" FontSize="22" HorizontalAlignment="Center">
-                Name
-        </Label>
-        <Grid Height="60">
+        Title="Hall" MaxHeight="600" MaxWidth="900" MinHeight="400" MinWidth="600">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="20"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-        </Grid>
-        <Grid Height="300">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="60"/>
-                <ColumnDefinition/>
-                <ColumnDefinition Width="60"/>
+                <ColumnDefinition Width="85"/>
+                <ColumnDefinition Width="50"/>
             </Grid.ColumnDefinitions>
 
-            <TextBlock Grid.Column="1" Grid.Row="0">Dice</TextBlock>
-            <TextBlock Grid.Column="1" Grid.Row="1">Lottery</TextBlock>
-            <TextBlock></TextBlock>
-            <TextBlock></TextBlock>
+            <Button Grid.Column="0" Grid.Row="0" Background="White" Click="Player_Click" HorizontalAlignment="Left">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                    <Image Grid.Column="0" Grid.Row="0">
+                    <Image.Source>
+                        pack://siteoforigin:,,,/Resources/if_caution_attention_person_user_account_profile_1083154.png
+                    </Image.Source>
+                    <Image.HorizontalAlignment>
+                        <HorizontalAlignment>Left</HorizontalAlignment>
+                    </Image.HorizontalAlignment>
+                    </Image>
+                    <Label  FontSize="22" Name="Login">
+                        Name
+                    </Label>
+                </StackPanel>
+            </Button>
+
+            <Label Grid.ColumnSpan="5" FontSize="36" HorizontalAlignment="Center" Content="Fair Lottery" RenderTransformOrigin="0.5,0.5">
+                <Label.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="-5"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Label.RenderTransform>
+            </Label>
+            
+            <Label Grid.Column="2" FontSize="22" Content="Баланс:" />
+            <Label Grid.Column="3" FontSize="22" Name="Money" Content="0" />
         </Grid>
-    </StackPanel>
+
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="0.4*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.05*"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="0.05*"/>
+                </Grid.ColumnDefinitions>
+
+                <Button Name="ButtonLottery" Grid.Column="1" Grid.Row="0" Click="ButtonLottery_Click">
+                    <TextBlock>Lottery</TextBlock>
+                </Button>
+                <Button Name="ButtonDice" Grid.Column="1" Grid.Row="1" Click="ButtonDice_Click">
+                    <TextBlock>Dice</TextBlock>
+                </Button>
+                <Button Grid.Column="1" Grid.Row="2">
+                    <TextBlock></TextBlock>
+                </Button>
+                <Button Grid.Column="1" Grid.Row="3">
+                    <TextBlock></TextBlock>
+                </Button>
+            </Grid>
+
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="35"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <Label Grid.Row="0" FontSize="18" HorizontalAlignment="Center" Content="Результаты недавних игр"/>
+                <StackPanel Grid.Row="1" Name="History">
+                    <!--Сдесь история всех последних игр-->
+                </StackPanel>
+            </Grid>
+        </Grid>
+    </Grid>
 </Window>
