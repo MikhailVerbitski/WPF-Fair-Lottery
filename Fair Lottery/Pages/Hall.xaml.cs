@@ -17,7 +17,7 @@ namespace Fair_Lottery.Pages
 {
     public partial class Hall : Page
     {
-        internal Hall(MainViewModel mainViewModel)
+        internal Hall(ViewModel.MainViewModel mainViewModel)
         {
             InitializeComponent();
             DataContext = mainViewModel;
@@ -25,12 +25,12 @@ namespace Fair_Lottery.Pages
 
         private void StartLottery(object sender, RoutedEventArgs e)
         {
-            (DataContext as MainViewModel).Game = new Logic.Lottery(DataContext as MainViewModel);
+            (DataContext as ViewModel.MainViewModel).AddGame(ViewModel.GamesEnum.Lottery);
         }
 
         private void StartDice(object sender, RoutedEventArgs e)
         {
-            (DataContext as MainViewModel).Game = new Logic.Dice(DataContext as MainViewModel);
+            (DataContext as ViewModel.MainViewModel).AddGame(ViewModel.GamesEnum.Dice);
         }
     }
 }

@@ -17,7 +17,7 @@ namespace Fair_Lottery.Pages
 {
     public partial class Player : Page
     {
-        internal Player(MainViewModel mainViewModel)
+        internal Player(ViewModel.MainViewModel mainViewModel)
         {
             InitializeComponent();
             DataContext = mainViewModel;
@@ -25,12 +25,12 @@ namespace Fair_Lottery.Pages
 
         private void AuthorizationClick(object sender, RoutedEventArgs e)
         {
-            (DataContext as MainViewModel).ActuallyBody = new Authorization(DataContext as MainViewModel);
+            (DataContext as ViewModel.MainViewModel).ActuallyBody = new Authorization(DataContext as ViewModel.MainViewModel);
         }
 
         private void RegistrationClick(object sender, RoutedEventArgs e)
         {
-            (DataContext as MainViewModel).ActuallyBody = new Registration(DataContext as MainViewModel);
+            (DataContext as ViewModel.MainViewModel).ActuallyBody = new Registration(DataContext as ViewModel.MainViewModel);
         }
     }
 }

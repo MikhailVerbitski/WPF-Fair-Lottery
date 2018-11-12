@@ -10,26 +10,26 @@ namespace Fair_Lottery.Logic
 {
     interface Game
     {
-
+        string Name { get; }
     }
     class Dice : Game
     {
-        private MainViewModel mainViewModel;
+        public string Name { get { return "Dice"; } }
+
+        private ViewModel.DiceViewModel mainViewModel;
         private static int ID_Name = 2;
 
-        public Dice(MainViewModel mainViewModel)
+        public Dice(ViewModel.GameViewModel mainViewModel)
         {
-            this.mainViewModel = mainViewModel;
-
-            mainViewModel.Balance = Math.Round(mainViewModel.VMPlayer.Money, 1);
-            mainViewModel.DiceSliderMaximum = Convert.ToDouble(mainViewModel.VMPlayer.Money);
+            this.mainViewModel = mainViewModel as ViewModel.DiceViewModel;
+            this.mainViewModel.DiceSliderMaximum = Convert.ToDouble(mainViewModel.GetPlayer.Money);
         }
         public void MakeBet(object obj)
         {
             decimal result = 0;
             decimal Ratio = 3;
             int WinNum = new Random(DateTime.Now.Millisecond).Next(1, 6);
-            int ID_Raffle = Table.Raffle.CreateRaffle(mainViewModel.VMPlayer.ID, WinNum, ID_Name);
+            int ID_Raffle = Table.Raffle.CreateRaffle(mainViewModel.GetPlayer.ID, WinNum, ID_Name);
             int[] ID = new int[6] { 1, 2, 3, 4, 5, 6 };
             string[] buttons = new string[6] { "pack://siteoforigin:,,,/Resource/Dice_One.png",
                                              "pack://siteoforigin:,,,/Resource/Dice_Two.png",
@@ -45,20 +45,20 @@ namespace Fair_Lottery.Logic
                     result += (WinNum == ID[i]) ? mainViewModel.Rates[i] * Ratio : 0;
                 }
 
-            if (mainViewModel.VMPlayer is Persone)
+            if (mainViewModel.GetPlayer is Persone)
             {
-                Table.Persone.UpdateMoney(mainViewModel.VMPlayer.ID, result);
-                (mainViewModel.VMPlayer as Persone).Refresh();
+                Table.Persone.UpdateMoney(mainViewModel.GetPlayer.ID, result);
+                (mainViewModel.GetPlayer as Persone).Refresh();
             }
             else
             {
-                (mainViewModel.VMPlayer as Guest).Money += result;
+                (mainViewModel.GetPlayer as Guest).Money += result;
             }
             Table.Raffle.SetResult(ID_Raffle, result);
 
             mainViewModel.WinImageSource = buttons[WinNum - 1];
             mainViewModel.Result = result.ToString();
-            mainViewModel.Balance = Math.Round(mainViewModel.VMPlayer.Money, 1);
+            mainViewModel.GetBalance = Math.Round(mainViewModel.GetPlayer.Money, 1);
 
             mainViewModel.DiceIsEnableElement = false;
             mainViewModel.DiceVisibilityHiddenElement = Visibility.Visible;
@@ -72,7 +72,7 @@ namespace Fair_Lottery.Logic
                 {
                     mainViewModel.Rates[i] += Convert.ToDecimal(mainViewModel.DiceSlider);
                     mainViewModel.OnPropertyChanged("Rates");
-                    mainViewModel.Balance -= Convert.ToDecimal(mainViewModel.DiceSlider);
+                    mainViewModel.GetBalance -= Convert.ToDecimal(mainViewModel.DiceSlider);
                     mainViewModel.DiceProbability = (Convert.ToDouble(mainViewModel.DiceProbability) + (1.0 / 6)).ToString();
                 }
             mainViewModel.DiceProbability = Math.Round(Convert.ToDouble(mainViewModel.DiceProbability) * 100, 1) + "%";
@@ -81,7 +81,9 @@ namespace Fair_Lottery.Logic
 
     class Lottery : Game
     {
-        private MainViewModel mainViewModel;
+        public string Name { get { return "Lottery"; } }
+
+        private ViewModel.LotteryViewModel mainViewModel;
         private static int ID_Name = 1;
         private decimal price;
         private decimal Bet;
@@ -89,18 +91,16 @@ namespace Fair_Lottery.Logic
         System.Collections.ObjectModel.ObservableCollection<int> Tickets = new System.Collections.ObjectModel.ObservableCollection<int>();
         System.Collections.ObjectModel.ObservableCollection<int> Rest = new System.Collections.ObjectModel.ObservableCollection<int>();
 
-        public Lottery(MainViewModel mainViewModel)
+        public Lottery(ViewModel.GameViewModel mainViewModel)
         {
-            this.mainViewModel = mainViewModel;
-            this.mainViewModel.VMPlayer = mainViewModel.VMPlayer;
+            this.mainViewModel = mainViewModel as ViewModel.LotteryViewModel;
 
             for (int i = 0; i < 100000; i++)
                 Rest.Add(i);
-
-            mainViewModel.Balance = mainViewModel.VMPlayer.Money;
+            
             price = 1;
             Bet = 0;
-            mainViewModel.LotterySliderMaximum = Convert.ToDouble(mainViewModel.VMPlayer.Money / price);
+            this.mainViewModel.LotterySliderMaximum = Convert.ToDouble(mainViewModel.GetPlayer.Money / price);
         }
         public void BuyFew(object obj)
         {
@@ -111,14 +111,14 @@ namespace Fair_Lottery.Logic
                 Rest.RemoveAt(n);
             }
             Bet += price * Convert.ToDecimal(mainViewModel.LotterySlider);
-            mainViewModel.Balance = mainViewModel.VMPlayer.Money - Bet;
-            mainViewModel.LotterySliderMaximum = Convert.ToDouble(mainViewModel.VMPlayer.Money - Bet);
+            mainViewModel.GetBalance = mainViewModel.GetPlayer.Money - Bet;
+            mainViewModel.LotterySliderMaximum = Convert.ToDouble(mainViewModel.GetPlayer.Money - Bet);
             mainViewModel.PurchasedTickets = Tickets;
         }
         public void Button_Raffle(object obj)
         {
             int WinNum = new Random(DateTime.Now.Millisecond).Next(0, 99999);
-            int ID_Raffle = Table.Raffle.CreateRaffle(mainViewModel.VMPlayer.ID, WinNum, ID_Name);
+            int ID_Raffle = Table.Raffle.CreateRaffle(mainViewModel.GetPlayer.ID, WinNum, ID_Name);
 
             //foreach (int num in Tickets)
             //    Table.Bet.CreateBet(7, ID_Raffle, price, num);
@@ -127,10 +127,10 @@ namespace Fair_Lottery.Logic
 
             decimal Winnings = (Tickets.Where(n => n == WinNum).Count() > 0) ? 50000m : 0;
             decimal Result = Winnings - Bet;
-            mainViewModel.VMPlayer.Money += Result;
-            Table.Persone.UpdateMoney(mainViewModel.VMPlayer.ID, Result);
+            mainViewModel.GetPlayer.Money += Result;
+            Table.Persone.UpdateMoney(mainViewModel.GetPlayer.ID, Result);
             Table.Raffle.SetResult(ID_Raffle, Result);
-            mainViewModel.Balance = mainViewModel.VMPlayer.Money;
+            mainViewModel.GetBalance = mainViewModel.GetPlayer.Money;
 
             mainViewModel.LotteryWinNum = WinNum;
             mainViewModel.LotteryWinnings = Result + Bet;
@@ -160,8 +160,8 @@ namespace Fair_Lottery.Logic
                 Tickets.Add(Num);
                 Rest.Remove(Num);
                 Bet += price;
-                mainViewModel.Balance = mainViewModel.VMPlayer.Money - Bet;
-                mainViewModel.LotterySliderMaximum = Convert.ToDouble(mainViewModel.VMPlayer.Money - Bet);
+                mainViewModel.GetBalance = mainViewModel.GetPlayer.Money - Bet;
+                mainViewModel.LotterySliderMaximum = Convert.ToDouble(mainViewModel.GetPlayer.Money - Bet);
             }
             mainViewModel.PurchasedTickets = Tickets;
             mainViewModel.LotteryNumbers = new string[] { "", "", "", "", "",};

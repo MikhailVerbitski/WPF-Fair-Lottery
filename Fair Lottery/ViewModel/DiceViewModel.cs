@@ -13,10 +13,12 @@ using System.Runtime.CompilerServices;
 
 using System.Collections.ObjectModel;
 
-namespace Fair_Lottery
+namespace Fair_Lottery.ViewModel
 {
-    partial class MainViewModel
+    class DiceViewModel : GameViewModel, INotifyPropertyChanged
     {
+        public DiceViewModel(Game game) : base(game) { }
+
         private string diceProbability = "0";
         public string DiceProbability
         {
@@ -107,7 +109,7 @@ namespace Fair_Lottery
             }
         }
 
-        private decimal[] rates = { 0,0,0,0,0,0 };
+        private decimal[] rates = { 0, 0, 0, 0, 0, 0 };
         public decimal[] Rates
         {
             get { return rates; }
@@ -131,7 +133,7 @@ namespace Fair_Lottery
         {
             get
             {
-                return diceBuy ?? (diceBuy = new Command((Game as Logic.Dice).Buy));
+                return diceBuy ?? (diceBuy = new Command( (game.LogicGame as Logic.Dice).Buy) );
             }
         }
 
@@ -140,7 +142,10 @@ namespace Fair_Lottery
         {
             get
             {
-                return diceRestart ?? (diceRestart = new Command(obj => { Game = new Logic.Dice(this); }));
+                return diceRestart ?? (diceRestart = new Command(obj => {
+                    game.GameViewModel = new DiceViewModel(game);
+                    game.LogicGame = new Logic.Dice(game.GameViewModel);
+                }));
             }
         }
 
@@ -149,8 +154,26 @@ namespace Fair_Lottery
         {
             get
             {
-                return diceMakeBet ?? (diceMakeBet = new Command( (Game as Logic.Dice).MakeBet ));
+                return diceMakeBet ?? (diceMakeBet = new Command((game.LogicGame as Logic.Dice).MakeBet));
             }
+        }
+
+        public Command GameDie
+        {
+            get
+            {
+                return new Command((obj) => {
+                    game.mainViewModel.BottomPanelButtons.Remove(game.GameButton);
+                    game.mainViewModel.OnPropertyChanged("BottomPanelButtons");
+                    game.mainViewModel.ActuallyBody = new Pages.Hall(game.mainViewModel);
+                });
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        public void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

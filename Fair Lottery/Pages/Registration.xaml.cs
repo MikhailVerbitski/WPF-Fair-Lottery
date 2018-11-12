@@ -17,7 +17,7 @@ namespace Fair_Lottery.Pages
 {
     public partial class Registration : Page
     {
-        internal Registration(MainViewModel mainViewModel)
+        internal Registration(ViewModel.MainViewModel mainViewModel)
         {
             InitializeComponent();
             DataContext = mainViewModel;
@@ -30,8 +30,8 @@ namespace Fair_Lottery.Pages
             }
             else
             {
-                (DataContext as MainViewModel).VMPlayer = new Logic.Persone(Logic.Table.Persone.CreatePersone(Login.Text, Pass.Password), Login.Text, Pass.Password);
-                (DataContext as MainViewModel).ActuallyBody = new Player(DataContext as MainViewModel);
+                (DataContext as ViewModel.MainViewModel).VMPlayer = new Logic.Persone(Logic.Table.Persone.CreatePersone(Login.Text, Pass.Password), Login.Text, Pass.Password);
+                (DataContext as ViewModel.MainViewModel).ActuallyBody = new Player(DataContext as ViewModel.MainViewModel);
             }
         }
     }

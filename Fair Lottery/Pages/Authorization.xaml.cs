@@ -17,15 +17,15 @@ namespace Fair_Lottery.Pages
 {
     public partial class Authorization : Page
     {
-        internal Authorization(MainViewModel mainViewModel)
+        internal Authorization(ViewModel.MainViewModel mainViewModel)
         {
             InitializeComponent();
             DataContext = mainViewModel;
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            (DataContext as MainViewModel).VMPlayer = Logic.Persone.GetPlayer(true, Login.Text, Pass.Password);
-            (DataContext as MainViewModel).ActuallyBody = new Player(DataContext as MainViewModel);
+            (DataContext as ViewModel.MainViewModel).VMPlayer = Logic.Persone.GetPlayer(true, Login.Text, Pass.Password);
+            (DataContext as ViewModel.MainViewModel).ActuallyBody = new Player(DataContext as ViewModel.MainViewModel);
         }
     }
 }

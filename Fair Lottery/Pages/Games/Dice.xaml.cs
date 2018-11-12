@@ -17,7 +17,7 @@ namespace Fair_Lottery.Pages.Games
 {
     public partial class Dice : Page
     {
-        internal Dice(MainViewModel mainViewModel)
+        internal Dice(ViewModel.DiceViewModel mainViewModel)
         {
             InitializeComponent();
             DataContext = mainViewModel;

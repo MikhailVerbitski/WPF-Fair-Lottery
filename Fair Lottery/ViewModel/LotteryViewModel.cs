@@ -13,10 +13,12 @@ using System.Runtime.CompilerServices;
 
 using System.Collections.ObjectModel;
 
-namespace Fair_Lottery
+namespace Fair_Lottery.ViewModel
 {
-    partial class MainViewModel
+    class LotteryViewModel : GameViewModel, INotifyPropertyChanged
     {
+        public LotteryViewModel(Game game) : base(game) { }
+
         private double lotterySlider;
         public double LotterySlider
         {
@@ -104,7 +106,7 @@ namespace Fair_Lottery
             }
         }
 
-        private string[] lotteryNumbers = new string[5]{ "", "", "", "", "" };
+        private string[] lotteryNumbers = new string[5] { "", "", "", "", "" };
         public string[] LotteryNumbers
         {
             get { return lotteryNumbers; }
@@ -115,12 +117,26 @@ namespace Fair_Lottery
             }
         }
 
+        private System.Collections.ObjectModel.ObservableCollection<int> purchasedTickets;
+        public System.Collections.ObjectModel.ObservableCollection<int> PurchasedTickets
+        {
+            get { return purchasedTickets; }
+            set
+            {
+                purchasedTickets = value;
+                OnPropertyChanged("PurchasedTickets");
+            }
+        }
+
         private Command lotteyRestart;
         public Command LotteryRestart
         {
             get
             {
-                return lotteyRestart ?? (lotteyRestart = new Command(obj => { Game = new Logic.Dice(this); }));
+                return lotteyRestart ?? (lotteyRestart = new Command(obj => {
+                    game.GameViewModel = new LotteryViewModel(game);
+                    game.LogicGame = new Logic.Lottery(game.GameViewModel);
+                }));
             }
         }
 
@@ -129,7 +145,7 @@ namespace Fair_Lottery
         {
             get
             {
-                return lotteryRaffle ?? (lotteryRaffle = new Command( (Game as Logic.Lottery).Button_Raffle ));
+                return lotteryRaffle ?? (lotteryRaffle = new Command((game.LogicGame as Logic.Lottery).Button_Raffle));
             }
         }
 
@@ -138,7 +154,7 @@ namespace Fair_Lottery
         {
             get
             {
-                return lotteryBuyFew ?? (lotteryBuyFew = new Command((Game as Logic.Lottery).BuyFew));
+                return lotteryBuyFew ?? (lotteryBuyFew = new Command((game.LogicGame as Logic.Lottery).BuyFew));
             }
         }
 
@@ -147,7 +163,7 @@ namespace Fair_Lottery
         {
             get
             {
-                return lotteryBuyTicket ?? (lotteryBuyTicket = new Command((Game as Logic.Lottery).BuyTicket));
+                return lotteryBuyTicket ?? (lotteryBuyTicket = new Command((game.LogicGame as Logic.Lottery).BuyTicket));
             }
         }
 
@@ -156,9 +172,26 @@ namespace Fair_Lottery
         {
             get
             {
-                return lotteryGenerateNumber ?? (lotteryGenerateNumber = new Command((Game as Logic.Lottery).Button_Generate));
+                return lotteryGenerateNumber ?? (lotteryGenerateNumber = new Command((game.LogicGame as Logic.Lottery).Button_Generate));
             }
         }
-        
+
+        public Command GameDie
+        {
+            get
+            {
+                return new Command((obj) => {
+                    game.mainViewModel.BottomPanelButtons.Remove(game.GameButton);
+                    game.mainViewModel.OnPropertyChanged("BottomPanelButtons");
+                    game.mainViewModel.ActuallyBody = new Pages.Hall(game.mainViewModel);
+                });
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        public void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 }

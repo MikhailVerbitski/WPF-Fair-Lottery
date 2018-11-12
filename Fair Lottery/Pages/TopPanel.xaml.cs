@@ -17,7 +17,7 @@ namespace Fair_Lottery.Pages
 {
     public partial class TopPanel : Page
     {
-        internal TopPanel(MainViewModel mainViewModel)
+        internal TopPanel(ViewModel.MainViewModel mainViewModel)
         {
             InitializeComponent();
             DataContext = mainViewModel;

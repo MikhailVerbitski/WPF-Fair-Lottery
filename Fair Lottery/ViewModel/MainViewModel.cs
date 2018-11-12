@@ -13,12 +13,23 @@ using System.Runtime.CompilerServices;
 
 using System.Collections.ObjectModel;
 
-namespace Fair_Lottery
+namespace Fair_Lottery.ViewModel
 {
-    partial class MainViewModel : INotifyPropertyChanged
+    abstract class GameViewModel
+    {
+        protected Game game;
+        public Logic.Player GetPlayer { get { return game.mainViewModel.VMPlayer; } set { game.mainViewModel.VMPlayer = value; } }
+        public decimal GetBalance { get { return game.mainViewModel.Balance; } set { game.mainViewModel.Balance = value; } }
+
+        public GameViewModel(Game game)
+        {
+            this.game = game;
+        }
+    }
+    class MainViewModel : INotifyPropertyChanged
     {
         private Logic.Player player = new Logic.Guest();
-        private Logic.Game game;
+        private List<Game> games = new List<Game>();
 
         private Page actuallyTop;
         private Page actuallyBottom;
@@ -26,9 +37,6 @@ namespace Fair_Lottery
         private decimal balance;
 
         private ObservableCollection<Logic.GameInfo> lastGames;
-        private ObservableCollection<Button> bottomPanelListButton;
-
-        private Button GameButton = new Button();
 
         public Logic.Player VMPlayer
         {
@@ -40,6 +48,15 @@ namespace Fair_Lottery
                 OnPropertyChanged("Balance");
                 OnPropertyChanged("VMPlayer");
 
+            }
+        }
+        public decimal Balance
+        {
+            get { return balance; }
+            set
+            {
+                balance = value;
+                OnPropertyChanged("Balance");
             }
         }
         public Page ActuallyTop
@@ -85,49 +102,10 @@ namespace Fair_Lottery
                 OnPropertyChanged("LastGames");
             }
         }
-        public decimal Balance
+
+        public void AddGame(GamesEnum game)
         {
-            get { return balance; }
-            set
-            {
-                balance = value;
-                OnPropertyChanged("Balance");
-            }
-        }
-        public ObservableCollection<Button> BottomPanelListButton
-        {
-            get { return bottomPanelListButton; }
-            set
-            {
-                bottomPanelListButton = value;
-                OnPropertyChanged("BottomPanelListButton");
-            }
-        }
-        public Logic.Game Game
-        {
-            get { return game; }
-            set
-            {
-                game = value;
-                Page page;
-                if (game is Logic.Dice)
-                {
-                    page = new Pages.Games.Dice(this);
-                    ActuallyBody = page;
-                    GameButton.Command = new Command( (obj) => { ActuallyBody = page; } );
-                    GameButton.Content = "Dice";
-                }
-                else if (game is Logic.Lottery)
-                {
-                    page = new Pages.Games.Lottery(this);
-                    ActuallyBody = page;
-                    GameButton.Command = new Command((obj) => { ActuallyBody = page; });
-                    GameButton.Content = "Lottery";
-                }
-                bottomPanelButtons.Remove(GameButton);
-                bottomPanelButtons.Add(GameButton);
-                OnPropertyChanged("BottomPanelButtons");
-            }
+            games.Add(new Game(game, this));
         }
 
         public MainViewModel()
@@ -143,7 +121,7 @@ namespace Fair_Lottery
 
 
             Button Home = new Button();
-            Home.Command = new Command( (obj) => { ActuallyBody = new Pages.Hall(this); });
+            Home.Command = new Command((obj) => { ActuallyBody = new Pages.Hall(this); });
             Home.Content = "Home";
             Button Player = new Button();
             Player.Command = new Command((obj) => { ActuallyBody = new Pages.Player(this); });
@@ -153,23 +131,64 @@ namespace Fair_Lottery
             bottomPanelButtons.Add(Player);
         }
 
-        public Command GameDie
+        private ObservableCollection<Button> bottomPanelButtons = new ObservableCollection<Button>();
+        public ObservableCollection<Button> BottomPanelButtons
         {
-            get
+            get { return bottomPanelButtons; }
+            set
             {
-                return new Command((obj) => {
-                    bottomPanelButtons.Remove(GameButton);
-                    OnPropertyChanged("BottomPanelButtons");
-                    ActuallyBody = new Pages.Hall(this);
-                });
+                bottomPanelButtons = value;
+                OnPropertyChanged("BottomPanelButtons");
             }
         }
+        public void AddButtons(Button button)
+        {
+            bottomPanelButtons.Add(button);
+            OnPropertyChanged("BottomPanelButtons");
+        }
 
+        ///////////////////////////////////////////////////////////////////////////////
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+    }
+    class Game
+    {
+        public Logic.Game LogicGame;
+        public GameViewModel GameViewModel;
+        public MainViewModel mainViewModel;
+        public Page page;
+        public Button GameButton = new Button();
+
+        public Game(GamesEnum games, MainViewModel mainViewModel)
+        {
+            this.mainViewModel = mainViewModel;
+            if(games == GamesEnum.Dice)
+            {
+                GameViewModel = new DiceViewModel(this);
+                LogicGame = new Logic.Dice(GameViewModel);
+                page = new Pages.Games.Dice(GameViewModel as DiceViewModel);
+            }
+            else if(games == GamesEnum.Lottery)
+            {
+                GameViewModel = new LotteryViewModel(this);
+                LogicGame = new Logic.Lottery(GameViewModel);
+                page = new Pages.Games.Lottery(GameViewModel as LotteryViewModel);
+            }
+
+            GameButton.Content = LogicGame.Name;
+            GameButton.Command = new Command((obj) => { mainViewModel.ActuallyBody = page; });
+            mainViewModel.ActuallyBody = page;
+            mainViewModel.AddButtons(GameButton);
+        }
+    }
+
+    enum GamesEnum
+    {
+        Dice,
+        Lottery
     }
 
     class Command : ICommand
