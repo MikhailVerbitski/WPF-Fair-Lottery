@@ -1,0 +1,82 @@
+﻿<Page x:Class="Fair_Lottery.Pages.Player"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Fair_Lottery.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="600" d:DesignWidth="800"
+      Title="Player">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition MinWidth="250" Width="0.3*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.2*"/>
+                <ColumnDefinition Width="120"/>
+                <ColumnDefinition Width="140"/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="0.2*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.2*"/>
+                <RowDefinition Height="120"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="90"/>
+                <RowDefinition/>
+                <RowDefinition Height="0.2*"/>
+            </Grid.RowDefinitions>
+
+            <Image Grid.Column="1"
+                   Grid.Row="1"
+                   HorizontalAlignment="Right"
+                   Source="pack://siteoforigin:,,,/Resource/if_caution_attention_person_user_account_profile_1083154.png"/>
+            <Label Grid.Column="2"
+                   Grid.Row="1"
+                   VerticalAlignment="Bottom"
+                   HorizontalAlignment="Left"
+                   FontSize="38"
+                   Content="{Binding VMPlayer.Name}"/>
+            <Label Grid.Column="1"
+                   Grid.Row="2"
+                   FontSize="30"
+                   HorizontalAlignment="Right"
+                   Content="Money: "/>
+            <Label Grid.Column="2"
+                   Grid.Row="2"
+                   FontSize="30"
+                   HorizontalAlignment="Right"
+                   Content="{Binding VMPlayer.Money}"/>
+
+            <Button Grid.Column="3"
+                    Grid.Row="1"
+                    Content="Авторизация"
+                    Click="AuthorizationClick"/>
+            <Button Grid.Column="4"
+                    Grid.Row="1"
+                    Content="Регистрация"
+                    Click="RegistrationClick"/>
+        </Grid>
+
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="35"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Label Grid.Row="0" 
+                   FontSize="18" 
+                   HorizontalAlignment="Center" 
+                   Content="Результаты недавних игр"/>
+            <ListBox Grid.Row="1" 
+                     Background="#36393E" 
+                     BorderThickness="0"
+                     ItemsSource="{Binding LastGamePlayer}"/>
+        </Grid>
+    </Grid>
+</Page>

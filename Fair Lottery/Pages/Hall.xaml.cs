@@ -21,17 +21,17 @@ namespace Fair_Lottery.Pages
         {
             InitializeComponent();
             DataContext = mainViewModel;
-            (DataContext as MainViewModel).ActuallyRightPanel = new HallRightPanel(mainViewModel);
         }
 
-        private void ButtonLottery_Click(object sender, RoutedEventArgs e)
+        private void StartLottery(object sender, RoutedEventArgs e)
         {
-
+            (DataContext as MainViewModel).ActuallyBody = new Logic.Lottery(DataContext as MainViewModel);
         }
 
-        private void ButtonDice_Click(object sender, RoutedEventArgs e)
+        private void StartDice(object sender, RoutedEventArgs e)
         {
-
+            (DataContext as MainViewModel).ActuallyBody = new Logic.Dice(DataContext as MainViewModel);
         }
+
     }
 }

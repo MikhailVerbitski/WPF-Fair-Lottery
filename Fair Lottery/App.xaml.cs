@@ -8,6 +8,9 @@ using System.Windows;
 
 namespace Fair_Lottery
 {
+    /// <summary>
+    /// Логика взаимодействия для App.xaml
+    /// </summary>
     public partial class App : Application
     {
     }

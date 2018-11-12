@@ -5,19 +5,67 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Fair_Lottery.Pages"
       mc:Ignorable="d" 
-      d:DesignHeight="300" d:DesignWidth="300"
+      d:DesignHeight="60" d:DesignWidth="800"
       Title="TopPanel">
 
     <Grid Background="#202225">
-        <Label Grid.ColumnSpan="5" Foreground="#F59D6D" FontSize="36" HorizontalAlignment="Center" Content="Fair Lottery" RenderTransformOrigin="0.5,0.5">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="85"/>
+            <ColumnDefinition Width="100"/>
+        </Grid.ColumnDefinitions>
+
+        <Label Content="Здравствуйте"
+                FontSize="17"
+                Foreground="#DF5006"/>
+        <Label Grid.Column="0"
+               Content="{Binding VMPlayer.Name}"
+               FontSize="28"
+               HorizontalAlignment="Right"
+               VerticalAlignment="Bottom"
+               Foreground="#DF5006"/>
+        <Label Grid.ColumnSpan="5" 
+            Foreground="#FE9505" 
+            FontSize="36" 
+            HorizontalAlignment="Center" 
+            Content="Fair Lottery" 
+            RenderTransformOrigin="0.5,0.5">
+
             <Label.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="-5"/>
-                    <TranslateTransform/>
-                </TransformGroup>
+                <RotateTransform x:Name="AnimatedRotateTransform" Angle="0" />
             </Label.RenderTransform>
+            <Label.Triggers>
+                <EventTrigger RoutedEvent="Loaded">
+                    <EventTrigger.Actions>
+
+                        <BeginStoryboard>
+                            <Storyboard Timeline.DesiredFrameRate="60">
+                                <DoubleAnimation 
+                                    Storyboard.TargetName="AnimatedRotateTransform"
+                                    Storyboard.TargetProperty="Angle"
+                                    From="-5"
+                                    To="355"
+                                    Duration="0:0:0:2"
+                                    DecelerationRatio="1"
+                                    RepeatBehavior="Forever"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                        
+                    </EventTrigger.Actions>
+                </EventTrigger>
+            </Label.Triggers>
+
         </Label>
+        <Label Grid.Column="3" Grid.Row="0" 
+               FontSize="22" 
+               Content="Баланс:"
+               Foreground="#DF5006"/>
+        <Label Grid.Column="4" Grid.Row="0" 
+               FontSize="22" 
+               Content="{Binding Balance}" 
+               Foreground="#DF5006"
+               HorizontalAlignment="Center"/>
     </Grid>
 </Page>

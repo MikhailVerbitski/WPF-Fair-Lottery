@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26730.15
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fair Lottery", "Fair Lottery\Fair Lottery.csproj", "{B16F659C-C633-41C2-941E-893E12F703F4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fair Lottery", "Fair Lottery\Fair Lottery.csproj", "{BAA7C205-A7E0-4183-9508-393FB81F4023}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{B16F659C-C633-41C2-941E-893E12F703F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B16F659C-C633-41C2-941E-893E12F703F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B16F659C-C633-41C2-941E-893E12F703F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B16F659C-C633-41C2-941E-893E12F703F4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BAA7C205-A7E0-4183-9508-393FB81F4023}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BAA7C205-A7E0-4183-9508-393FB81F4023}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BAA7C205-A7E0-4183-9508-393FB81F4023}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BAA7C205-A7E0-4183-9508-393FB81F4023}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {A194E638-484E-42D7-9E10-2C0CA6C6EECC}
+		SolutionGuid = {0FA085AD-D1D6-4497-AF86-85255CF920CE}
 	EndGlobalSection
 EndGlobal

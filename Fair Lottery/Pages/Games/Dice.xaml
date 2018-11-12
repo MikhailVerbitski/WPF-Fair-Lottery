@@ -5,10 +5,147 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Fair_Lottery.Pages.Games"
       mc:Ignorable="d" 
-      d:DesignHeight="300" d:DesignWidth="300"
+      d:DesignHeight="400" d:DesignWidth="600"
       Title="Dice">
 
-    <Grid>
-        
+    <Grid MinWidth="600" MinHeight="400">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.03*"/>
+            <ColumnDefinition />
+            <ColumnDefinition Width="0.03*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.6*"/>
+            <RowDefinition Height="0.15*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Column="1" Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="0.2*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="0.2*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="0.2*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="0.2*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="0.2*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="30"/>
+            </Grid.RowDefinitions>
+
+            <ToggleButton Name="One" Grid.Column="0" Tag="pack://siteoforigin:,,,/Resource/Dice_One.jpg">
+                <Image Margin="3" Source="pack://siteoforigin:,,,/Resource/Dice_One.jpg" />
+            </ToggleButton>
+            <ToggleButton Name="Two" Grid.Column="2" Tag="pack://siteoforigin:,,,/Resource/Dice_Two.jpg">
+                <Image Margin="3" Source="pack://siteoforigin:,,,/Resource/Dice_Two.jpg" />
+            </ToggleButton>
+            <ToggleButton Name="Three" Grid.Column="4" Tag="pack://siteoforigin:,,,/Resource/Dice_Three.jpg">
+                <Image Margin="3" Source="pack://siteoforigin:,,,/Resource/Dice_Three.jpg"/>
+            </ToggleButton>
+            <ToggleButton Name="Four" Grid.Column="6" Tag="pack://siteoforigin:,,,/Resource/Dice_Four.jpg">
+                <Image Margin="3" Source="pack://siteoforigin:,,,/Resource/Dice_Four.jpg"/>
+            </ToggleButton>
+            <ToggleButton Name="Five" Grid.Column="8" Tag="pack://siteoforigin:,,,/Resource/Dice_Five.jpg">
+                <Image Margin="3" Source="pack://siteoforigin:,,,/Resource/Dice_Five.jpg"/>
+            </ToggleButton>
+            <ToggleButton Name="Six" Grid.Column="10" Tag="pack://siteoforigin:,,,/Resource/Dice_Six.jpg">
+                <Image Margin="3" Source="pack://siteoforigin:,,,/Resource/Dice_Six.jpg"/>
+            </ToggleButton>
+
+            <TextBlock Grid.Row="1" Grid.Column="0" Name="RateOne" Text="0" HorizontalAlignment="Center" FontSize="18"/>
+            <TextBlock Grid.Row="1" Grid.Column="2" Name="RateTwo" Text="0" HorizontalAlignment="Center" FontSize="18"/>
+            <TextBlock Grid.Row="1" Grid.Column="4" Name="RateThree" Text="0" HorizontalAlignment="Center" FontSize="18"/>
+            <TextBlock Grid.Row="1" Grid.Column="6" Name="RateFour" Text="0" HorizontalAlignment="Center" FontSize="18"/>
+            <TextBlock Grid.Row="1" Grid.Column="8" Name="RateFive" Text="0" HorizontalAlignment="Center" FontSize="18"/>
+            <TextBlock Grid.Row="1" Grid.Column="10" Name="RateSix" Text="0" HorizontalAlignment="Center" FontSize="18"/>
+        </Grid>
+
+        <Grid Grid.Column="1" Grid.Row="1">
+            <Label Grid.Column="1" HorizontalAlignment="Left">
+                Выберите сторону(стороны) кубика
+            </Label>
+        </Grid>
+
+        <Grid Grid.Column="1" Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="20"/>
+                <ColumnDefinition Width="0.8*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="20"/>
+                    <RowDefinition Height="25"/>
+                    <RowDefinition Height="10"/>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="10"/>
+                    <RowDefinition Height="40"/>
+                </Grid.RowDefinitions>
+
+                <Label Grid.Column="0" Grid.Row="0" Content="Сделайте ставку!"/>
+                <Slider Grid.Column="0" Grid.Row="1" Name="Slider" ValueChanged="Slider_ValueChanged" IsSnapToTickEnabled="True"/>
+
+                <Grid Grid.Column="0" Grid.Row="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Grid.Column="0" Name="Money" Content="0"/>
+                    <Button Grid.Column="1" Name="Start" Content="Купить!" Click="Buy"/>
+                </Grid>
+
+                <Button Grid.Column="0" Grid.Row="4" Content="Играть" Click="MakeBet"/>
+
+                <Grid Grid.Column="0" Grid.Row="6">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1.4*"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Grid.Column="0" Grid.Row="3" Name="TextResult" Visibility="Hidden" FontSize="16" Foreground="Green" Content="Ваш Выйгрыш:"/>
+                    <Label Grid.Column="1" Grid.Row="3" Name="Result" Visibility="Hidden" />
+                </Grid>
+            </Grid>
+
+            <Grid Grid.Column="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.55*"/>
+                    <RowDefinition Height="1.9*"/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="0.2*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Grid.Column="0" Content="Вероятность выйгрыша:"/>
+                    <Label Grid.Column="1" Name="probability" Content="0"/>
+                </Grid>
+
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1.8*"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Grid.Column="0" Name="WinLabImag" Visibility="Hidden" Content="Выпала сторона:"/>
+                    <Image Name="WinImage" Grid.Column="1"/>
+                </Grid>
+
+                <Button Grid.Row="2" Name="Restart" Background="White" Content="Играть еще" Visibility="Hidden" Click="Restart_Click"/>
+            </Grid>
+        </Grid>
     </Grid>
 </Page>

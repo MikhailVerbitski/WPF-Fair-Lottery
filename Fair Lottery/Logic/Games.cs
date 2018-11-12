@@ -8,215 +8,226 @@ using System.Windows;
 
 namespace Fair_Lottery.Logic
 {
-    //class Dice : GameWindow.Dice
-    //{
-    //    private Player persone;
-    //    private static int ID_Name = 2;
-    //    private double Probability = 0;
-    //    private decimal[] Rates = new decimal[6] { 0, 0, 0, 0, 0, 0 };
+    class Dice : Pages.Games.Dice
+    {
+        private MainViewModel mainViewModel;
+        private static int ID_Name = 2;
+        private double Probability = 0;
+        private decimal[] Rates = new decimal[6] { 0, 0, 0, 0, 0, 0 };
 
-    //    public Dice(Player persone)
-    //    {
-    //        InitializeComponent();
-    //        this.persone = persone;
-            
-    //        balance.Content = Math.Round(persone.Money, 1);
-    //        Slider.Maximum = Convert.ToDouble(persone.Money);
-    //    }
-    //    public override void MakeBet(object sender, RoutedEventArgs e)
-    //    {
-    //        decimal result = 0;
-    //        decimal Ratio = 3;
-    //        int WinNum = new Random(DateTime.Now.Millisecond).Next(1, 6);
-    //        int ID_Raffle = Table.Raffle.CreateRaffle(persone.ID, WinNum, ID_Name);
-    //        int[] ID = new int[6] { 1, 2, 3, 4, 5, 6 };
-    //        System.Windows.Controls.Primitives.ToggleButton[] buttons = new System.Windows.Controls.Primitives.ToggleButton[6] { One, Two, Three, Four, Five, Six };
+        public Dice(MainViewModel mainViewModel)
+        {
+            DataContext = this.mainViewModel = mainViewModel;
+            InitializeComponent();
 
-    //        for (int i = 0; i < 6; i++)
-    //            if (Rates[i] > 0)
-    //            {
-    //                Table.Bet.CreateBet(ID[i], ID_Raffle, Rates[i], ID[i]);
-    //                result -= Rates[i];
-    //                result += (WinNum == ID[i]) ? Rates[i] * Ratio : 0;
-    //            }
+            (DataContext as MainViewModel).Balance = Math.Round(mainViewModel.VMPlayer.Money, 1);
+            Slider.Maximum = Convert.ToDouble(mainViewModel.VMPlayer.Money);
+        }
+        public override void MakeBet(object sender, RoutedEventArgs e)
+        {
+            decimal result = 0;
+            decimal Ratio = 3;
+            int WinNum = new Random(DateTime.Now.Millisecond).Next(1, 6);
+            int ID_Raffle = Table.Raffle.CreateRaffle(mainViewModel.VMPlayer.ID, WinNum, ID_Name);
+            int[] ID = new int[6] { 1, 2, 3, 4, 5, 6 };
+            System.Windows.Controls.Primitives.ToggleButton[] buttons = new System.Windows.Controls.Primitives.ToggleButton[6] { One, Two, Three, Four, Five, Six };
 
-    //        if (persone is Persone)
-    //        {
-    //            Table.Persone.UpdateMoney(persone.ID, result);
-    //            (persone as Persone).Refresh();
-    //        }
-    //        else
-    //        {
-    //            (persone as Guest).Money += result;
-    //        }
-    //        Table.Raffle.SetResult(ID_Raffle, result);
-            
-    //        WinImage.Source = new System.Windows.Media.Imaging.BitmapImage(new Uri(buttons[WinNum - 1].Tag.ToString()));
-    //        Start.IsEnabled = false;
-    //        (sender as System.Windows.Controls.Button).IsEnabled = false;
-    //        Result.Content = result;
-    //        balance.Content = Math.Round(persone.Money, 1);
+            for (int i = 0; i < 6; i++)
+                if (Rates[i] > 0)
+                {
+                    Table.Bet.CreateBet(ID[i], ID_Raffle, Rates[i], ID[i]);
+                    result -= Rates[i];
+                    result += (WinNum == ID[i]) ? Rates[i] * Ratio : 0;
+                }
 
-    //        WinLabImag.Visibility = Visibility.Visible;
-    //        TextResult.Visibility = Visibility.Visible;
-    //        Result.Visibility = Visibility.Visible;
-    //        Restart.Visibility = Visibility.Visible;
-    //    }
-    //    public override void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
-    //    {
-    //        Money.Content = e.NewValue;
-    //    }
-    //    public override void Back(object sender, RoutedEventArgs e)
-    //    {
-    //        App.SwapWindows(this, new Windows.Hall(persone));
-    //    }
-    //    public override void Restart_Click(object sender, RoutedEventArgs e)
-    //    {
-    //        App.SwapWindows(this, new Dice(persone));
-    //    }
-    //    public override void Buy(object sender, RoutedEventArgs e)
-    //    {
-    //        System.Windows.Controls.Primitives.ToggleButton[] buttons = new System.Windows.Controls.Primitives.ToggleButton[6] { One, Two, Three, Four, Five, Six };
-    //        System.Windows.Controls.TextBlock[] textBlocks = new System.Windows.Controls.TextBlock[6] { RateOne, RateTwo, RateThree, RateFour, RateFive, RateSix };
-    //        Probability = 0;
-    //        for (int i = 0; i < 6; i++)
-    //            if ((bool)buttons[i].IsChecked)
-    //            {
-    //                Rates[i] += Convert.ToDecimal(Slider.Value);
-    //                textBlocks[i].Text = (Convert.ToDecimal(textBlocks[i].Text) + Convert.ToDecimal(Slider.Value)).ToString();
-    //                balance.Content = Convert.ToDouble(balance.Content) - Slider.Value;
-    //                Probability += (1.0 / 6);
-    //            }
-    //        probability.Content = Math.Round(Probability * 100, 1) + "%";
-    //    }
-    //}
-    //class Lottery : GameWindow.Lottery
-    //{
-    //    private static int ID_Name = 1;
-    //    private Player persone;
-    //    private decimal price;
-    //    private decimal Bet;
+            if (mainViewModel.VMPlayer is Persone)
+            {
+                Table.Persone.UpdateMoney(mainViewModel.VMPlayer.ID, result);
+                (mainViewModel.VMPlayer as Persone).Refresh();
+            }
+            else
+            {
+                (mainViewModel.VMPlayer as Guest).Money += result;
+            }
+            mainViewModel.Balance = mainViewModel.VMPlayer.Money;
+            Table.Raffle.SetResult(ID_Raffle, result);
 
-    //    private List<int> Tickets = new List<int>();
-    //    private List<int> Rest = new List<int>();
+            WinImage.Source = new System.Windows.Media.Imaging.BitmapImage(new Uri(buttons[WinNum - 1].Tag.ToString()));
+            Start.IsEnabled = false;
+            (sender as System.Windows.Controls.Button).IsEnabled = false;
+            Result.Content = result;
+            (DataContext as MainViewModel).Balance = Math.Round(mainViewModel.VMPlayer.Money, 1);
 
-    //    public Lottery(Player persone)
-    //    {
-    //        InitializeComponent();
-    //        this.persone = persone;
+            WinLabImag.Visibility = Visibility.Visible;
+            TextResult.Visibility = Visibility.Visible;
+            Result.Visibility = Visibility.Visible;
+            Restart.Visibility = Visibility.Visible;
+        }
+        public override void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            Money.Content = e.NewValue;
+        }
+        public override void Restart_Click(object sender, RoutedEventArgs e)
+        {
+            mainViewModel.ActuallyBody = new Dice(mainViewModel);
+        }
+        public override void Buy(object sender, RoutedEventArgs e)
+        {
+            System.Windows.Controls.Primitives.ToggleButton[] buttons = new System.Windows.Controls.Primitives.ToggleButton[6] { One, Two, Three, Four, Five, Six };
+            System.Windows.Controls.TextBlock[] textBlocks = new System.Windows.Controls.TextBlock[6] { RateOne, RateTwo, RateThree, RateFour, RateFive, RateSix };
+            Probability = 0;
+            for (int i = 0; i < 6; i++)
+                if ((bool)buttons[i].IsChecked)
+                {
+                    Rates[i] += Convert.ToDecimal(Slider.Value);
+                    textBlocks[i].Text = (Convert.ToDecimal(textBlocks[i].Text) + Convert.ToDecimal(Slider.Value)).ToString();
+                    (DataContext as MainViewModel).Balance = (DataContext as MainViewModel).Balance - Convert.ToDecimal(Slider.Value);
+                    Probability += (1.0 / 6);
+                }
+            probability.Content = Math.Round(Probability * 100, 1) + "%";
+        }
+    }
+    class Lottery : Pages.Games.Lottery
+    {
+        private MainViewModel mainViewModel;
+        private static int ID_Name = 1;
+        private decimal price;
+        private decimal Bet;
 
-    //        for (int i = 0; i < 100000; i++)
-    //            Rest.Add(i);
+        private List<int> Tickets = new List<int>();
+        private List<int> Rest = new List<int>();
 
-    //        balance.Content = persone.Money;
-    //        price = 1;
-    //        Bet = 0;
-    //        SliderBuyFew.Maximum = Convert.ToDouble(persone.Money / price);
-    //    }
-    //    private void ShowLast()
-    //    {
-    //        int Count = (Tickets.Count() < 20) ? Tickets.Count() : 20;
-    //        for (int i = 0; i < Count; i++)
-    //        {
-    //            System.Windows.Controls.Label label = new System.Windows.Controls.Label();
-    //            label.Height = 30;
-    //            label.FontSize = 14;
-    //            label.HorizontalAlignment = HorizontalAlignment.Center;
-    //            label.Content = Tickets[Tickets.Count - i - 1];
-    //            StackTickets.Children.Add(label);
-    //        }
-    //    }
-    //    public override void BuyFew(object sender, RoutedEventArgs e)
-    //    {
-    //        for(int i = 0, n; i < SliderBuyFew.Value; i++)
-    //        {
-    //            n = GeneratorFreeTickets(i);
-    //            Tickets.Add(Rest[n]);
-    //            Rest.RemoveAt(n);
-    //        }
-    //        Bet += price * Convert.ToDecimal(SliderBuyFew.Value);
-    //        balance.Content = (persone.Money - Bet);
-    //        SliderBuyFew.Maximum = Convert.ToDouble(persone.Money - Bet);
-    //        ShowLast();
-    //    }
-    //    public override void Button_Raffle(object sender, RoutedEventArgs e)
-    //    {
-    //        int WinNum = new Random(DateTime.Now.Millisecond).Next(0, 99999);
-    //        int ID_Raffle = Table.Raffle.CreateRaffle(persone.ID, WinNum, ID_Name);
+        public Lottery(MainViewModel mainViewModel)
+        {
+            DataContext = this.mainViewModel = mainViewModel;
+            InitializeComponent();
+            this.mainViewModel.VMPlayer = mainViewModel.VMPlayer;
 
-    //        //foreach (int num in Tickets)
-    //        //    Table.Bet.CreateBet(7, ID_Raffle, price, num);
-    //        Table.Bet.CreateBet(7, ID_Raffle, price, (Tickets.Where(n => n == WinNum).Count() > 0) ? Tickets.Where(n => n == WinNum).First() : Tickets.First());
-    //        //  Заменено из-за большого потребления памяти
+            for (int i = 0; i < 100000; i++)
+                Rest.Add(i);
 
-    //        decimal Winnings = (Tickets.Where(n => n == WinNum).Count() > 0) ? 50000m : 0;
-    //        decimal Result = Winnings - Bet;
-    //        persone.Money += Result;
-    //        Table.Persone.UpdateMoney(persone.ID, Result);
-    //        Table.Raffle.SetResult(ID_Raffle, Result);
+            (DataContext as MainViewModel).Balance = mainViewModel.VMPlayer.Money;
+            price = 1;
+            Bet = 0;
+            SliderBuyFew.Maximum = Convert.ToDouble(mainViewModel.VMPlayer.Money / price);
+        }
+        private void ShowLast()
+        {
+            int Count = (Tickets.Count() < 20) ? Tickets.Count() : 20;
+            for (int i = 0; i < Count; i++)
+            {
+                System.Windows.Controls.Label label = new System.Windows.Controls.Label();
+                label.Height = 30;
+                label.FontSize = 14;
+                label.HorizontalAlignment = HorizontalAlignment.Center;
+                label.Content = Tickets[Tickets.Count - i - 1];
+                StackTickets.Children.Add(label);
+            }
+        }
+        public override void BuyFew(object sender, RoutedEventArgs e)
+        {
+            for (int i = 0, n; i < SliderBuyFew.Value; i++)
+            {
+                n = GeneratorFreeTickets(i);
+                Tickets.Add(Rest[n]);
+                Rest.RemoveAt(n);
+            }
+            Bet += price * Convert.ToDecimal(SliderBuyFew.Value);
+            (DataContext as MainViewModel).Balance = mainViewModel.VMPlayer.Money - Bet;
+            SliderBuyFew.Maximum = Convert.ToDouble(mainViewModel.VMPlayer.Money - Bet);
+            ShowLast();
+        }
+        public override void Button_Raffle(object sender, RoutedEventArgs e)
+        {
+            int WinNum = new Random(DateTime.Now.Millisecond).Next(0, 99999);
+            int ID_Raffle = Table.Raffle.CreateRaffle(mainViewModel.VMPlayer.ID, WinNum, ID_Name);
 
-    //        winNum.Content = WinNum.ToString();
-    //        winnings.Text = (Result + Bet).ToString();
-    //        Buys.Text = Bet.ToString();
-    //        result.Text = Result.ToString();
+            //foreach (int num in Tickets)
+            //    Table.Bet.CreateBet(7, ID_Raffle, price, num);
+            Table.Bet.CreateBet(7, ID_Raffle, price, (Tickets.Where(n => n == WinNum).Count() > 0) ? Tickets.Where(n => n == WinNum).First() : Tickets.First());
+            //  Заменено из-за большого потребления памяти
 
-    //        buyFew.IsEnabled = false;
-    //        Generate.IsEnabled = false;
-    //        Buy.IsEnabled = false;
-    //        raffle.IsEnabled = false;
+            decimal Winnings = (Tickets.Where(n => n == WinNum).Count() > 0) ? 50000m : 0;
+            decimal Result = Winnings - Bet;
+            mainViewModel.VMPlayer.Money += Result;
+            Table.Persone.UpdateMoney(mainViewModel.VMPlayer.ID, Result);
+            Table.Raffle.SetResult(ID_Raffle, Result);
+            mainViewModel.Balance = mainViewModel.VMPlayer.Money;
 
-    //        TextWin.Visibility = Visibility.Visible;
-    //        winNum.Visibility = Visibility.Visible;
-    //        PlayAgain.Visibility = Visibility.Visible;
-    //        blabla.Visibility = Visibility.Visible;
-    //    }
-    //    public override void BuyTicket(object sender, RoutedEventArgs e)
-    //    {
-    //        string str = InFirst.Text + InSecond.Text + InThird.Text + InFourth.Text + InFifth.Text;
-    //        if (str == "") str = "00000";
-    //        int Num = Convert.ToInt32(str);
-    //        if (Tickets.Where(n => n == Num).Count() > 0)
-    //        {
-    //            System.Windows.Controls.Label label = new System.Windows.Controls.Label();
-    //            label.Height = 30;
-    //            label.FontSize = 14;
-    //            label.HorizontalAlignment = HorizontalAlignment.Center;
-    //            label.Content = "Уже куплен";
-    //            label.Foreground = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Colors.Red);
-    //        }
-    //        else
-    //        {
-    //            Tickets.Add(Num);
-    //            Rest.Remove(Num);
-    //            Bet += price;
-    //            balance.Content = (persone.Money - Bet);
-    //            SliderBuyFew.Maximum = Convert.ToDouble(persone.Money - Bet);
-    //        }
-    //        ShowLast();
-    //        InFirst.Text = InSecond.Text = InThird.Text = InFourth.Text = InFifth.Text = "";
-    //    }
-    //    public override void Button_Generate(object sender, RoutedEventArgs e)
-    //    {
-    //        System.Windows.Controls.TextBox[] textBoxs = new System.Windows.Controls.TextBox[5] { InFirst, InSecond, InThird, InFourth, InFifth };
-    //        char[] mas = GeneratorFreeTickets().ToString().ToCharArray();
-    //        for (int i = 0; i < 5; i++)
-    //            textBoxs[i].Text = (mas.Count() > i) ? mas[i].ToString() : "0";
-    //    }
-    //    private int GeneratorFreeTickets(int step = 0)
-    //    {
-    //        return new Random(DateTime.Now.Millisecond + step).Next(0, Rest.Count() - 1);
-    //    }
-    //    public override void Restart_Click(object sender, RoutedEventArgs e)
-    //    {
-    //        App.SwapWindows(this, new Lottery(persone));
-    //    }
-    //    public override void Back(object sender, RoutedEventArgs e)
-    //    {
-    //        App.SwapWindows(this, new Windows.Hall(persone));
-    //    }
-    //    public override void Slider_ValueChanged(object sender, RoutedEventArgs e)
-    //    {
-    //        SliderCount.Content = SliderBuyFew.Value;
-    //    }
-    //}
+            winNum.Content = WinNum.ToString();
+            winnings.Text = (Result + Bet).ToString();
+            Buys.Text = Bet.ToString();
+            result.Text = Result.ToString();
+
+            buyFew.IsEnabled = false;
+            Generate.IsEnabled = false;
+            Buy.IsEnabled = false;
+            raffle.IsEnabled = false;
+
+            TextWin.Visibility = Visibility.Visible;
+            winNum.Visibility = Visibility.Visible;
+            PlayAgain.Visibility = Visibility.Visible;
+            blabla.Visibility = Visibility.Visible;
+        }
+        public override void BuyTicket(object sender, RoutedEventArgs e)
+        {
+            string str = InFirst.Text + InSecond.Text + InThird.Text + InFourth.Text + InFifth.Text;
+            if (str == "") str = "00000";
+            int Num = Convert.ToInt32(str);
+            if (Tickets.Where(n => n == Num).Count() > 0)
+            {
+                System.Windows.Controls.Label label = new System.Windows.Controls.Label();
+                label.Height = 30;
+                label.FontSize = 14;
+                label.HorizontalAlignment = HorizontalAlignment.Center;
+                label.Content = "Уже куплен";
+                label.Foreground = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Colors.Red);
+            }
+            else
+            {
+                Tickets.Add(Num);
+                Rest.Remove(Num);
+                Bet += price;
+                (DataContext as MainViewModel).Balance = mainViewModel.VMPlayer.Money - Bet;
+                SliderBuyFew.Maximum = Convert.ToDouble(mainViewModel.VMPlayer.Money - Bet);
+            }
+            ShowLast();
+            InFirst.Text = InSecond.Text = InThird.Text = InFourth.Text = InFifth.Text = "";
+        }
+        public override void Button_Generate(object sender, RoutedEventArgs e)
+        {
+            System.Windows.Controls.TextBox[] textBoxs = new System.Windows.Controls.TextBox[5] { InFirst, InSecond, InThird, InFourth, InFifth };
+            char[] mas = GeneratorFreeTickets().ToString().ToCharArray();
+            for (int i = 0; i < 5; i++)
+                textBoxs[i].Text = (mas.Count() > i) ? mas[i].ToString() : "0";
+        }
+        private int GeneratorFreeTickets(int step = 0)
+        {
+            return new Random(DateTime.Now.Millisecond + step).Next(0, Rest.Count() - 1);
+        }
+        public override void Restart_Click(object sender, RoutedEventArgs e)
+        {
+            mainViewModel.ActuallyBody = new Lottery(mainViewModel);
+        }
+        public override void Slider_ValueChanged(object sender, RoutedEventArgs e)
+        {
+            SliderCount.Content = SliderBuyFew.Value;
+        }
+    }
+    struct GameInfo
+    {
+        private string NameGame;
+        private string NamePlayer;
+        private decimal Result;
+        public GameInfo(string NameGame, string NamePlayer, decimal Result)
+        {
+            this.NameGame = NameGame;
+            this.NamePlayer = NamePlayer;
+            this.Result = Result;
+        }
+        public override string ToString()
+        {
+            return NameGame + ": " + NamePlayer + " -> " + Result;
+        }
+    }
 }

@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 
 using System.Data.SQLite;
 
+using System.Collections.ObjectModel;
+
 namespace Fair_Lottery.Logic
 {
     static class Table
@@ -251,34 +253,33 @@ namespace Fair_Lottery.Logic
                 command.Parameters.Add("@id", System.Data.DbType.Int32).Value = ID_Persone;
                 return Convert.ToInt32(command.ExecuteScalar());
             }
-            public static void GetStringResult(int count, out string[] PlayerName, out decimal[] Result, out string[] NameGame, int ID = -1)
+            public static ObservableCollection<GameInfo> GetLastGameInfo(int ID = -1)
             {
-                PlayerName = new string[count];
-                Result = new decimal[count];
-                NameGame = new string[count];
-
                 SQLiteCommand command = DBConnect.CreateCommand();
 
-                if (ID > 0)
-                    command.CommandText += "SELECT * FROM Raffle  WHERE ID_of_Persone=@id ORDER BY ID_Raffle DESC LIMIT @COUNT";
-                else
-                    command.CommandText = "SELECT * FROM Raffle ORDER BY ID_Raffle DESC LIMIT @COUNT";
+                int Length = Logic.Table.Raffle.GetCountRaffle();
+                ObservableCollection<GameInfo> gameInfo = new ObservableCollection<GameInfo>();
 
-                command.Parameters.Add("@COUNT", System.Data.DbType.Int32).Value = count;
-                command.Parameters.Add("@id", System.Data.DbType.Int32).Value = ID;
+                if (ID > 0)
+                {
+                    command.CommandText = "SELECT * FROM Raffle WHERE ID_of_Persone=@id ORDER BY ID_Raffle DESC";
+                    command.Parameters.Add("@id", System.Data.DbType.Int32).Value = ID;
+                }
+                else
+                    command.CommandText = "SELECT * FROM Raffle ORDER BY ID_Raffle DESC";
                 reader = command.ExecuteReader();
-                
-                for(int i = 0; (i < count) && (reader.Read()); i++)
+
+                for (int i = 0; (i < Length) && (reader.Read()); i++)
                 {
                     int ID_of_Persone = Convert.ToInt32(reader["ID_of_Persone"]);
-                    Result[i] = Convert.ToDecimal(reader["Result"]);
                     int ID_of_NameGames = Convert.ToInt32(reader["ID_of_NameGames"]);
-                    NameGame[i] = NameGames.GetName(ID_of_NameGames);
 
-                    PlayerName[i] = (ID_of_Persone == -42) ? "Гость" : Persone.GetName(ID_of_Persone);
+                    gameInfo.Add(new GameInfo((ID_of_Persone == -42) ? "Гость" : Persone.GetName(ID_of_Persone),
+                                               NameGames.GetName(ID_of_NameGames),
+                                               Convert.ToDecimal(reader["Result"])));
                 }
+                return gameInfo;
             }
-
         }
         public static class NameGames
         {

@@ -15,9 +15,6 @@ using System.Windows.Shapes;
 
 namespace Fair_Lottery.Pages
 {
-    /// <summary>
-    /// Логика взаимодействия для TopPanel.xaml
-    /// </summary>
     public partial class TopPanel : Page
     {
         internal TopPanel(MainViewModel mainViewModel)

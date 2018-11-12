@@ -17,37 +17,31 @@ namespace Fair_Lottery.Pages.Games
 {
     public partial class Lottery : Page
     {
-        internal Lottery()
+        public Lottery()
         {
             InitializeComponent();
         }
-
-        private void Button_Raffle(object sender, RoutedEventArgs e)
+        public virtual void BuyTicket(object sender, RoutedEventArgs e)
         {
 
         }
-
-        private void BuyFew(object sender, RoutedEventArgs e)
+        public virtual void Button_Generate(object sender, RoutedEventArgs e)
         {
 
         }
-
-        private void BuyTicket(object sender, RoutedEventArgs e)
+        public virtual void Button_Raffle(object sender, RoutedEventArgs e)
         {
 
         }
-
-        private void Button_Generate(object sender, RoutedEventArgs e)
+        public virtual void Restart_Click(object sender, RoutedEventArgs e)
         {
 
         }
-
-        private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        public virtual void Slider_ValueChanged(object sender, RoutedEventArgs e)
         {
 
         }
-
-        private void Restart_Click(object sender, RoutedEventArgs e)
+        public virtual void BuyFew(object sender, RoutedEventArgs e)
         {
 
         }

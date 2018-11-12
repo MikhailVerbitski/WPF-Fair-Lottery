@@ -8,19 +8,23 @@
       d:DesignHeight="300" d:DesignWidth="300"
       Title="BottomPanel">
 
-    <Grid Background="#2F3136">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1.2*"/>
-            <ColumnDefinition />
-            <ColumnDefinition Width="10"/>
-            <ColumnDefinition/>
-            <ColumnDefinition Width="10"/>
-            <ColumnDefinition/>
-            <ColumnDefinition Width="1.2*"/>
-        </Grid.ColumnDefinitions>
+    <Page.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Height" Value="50"/>
+            <Setter Property="Background" Value="#A9AAAC"/>
+            <Setter Property="Width" Value="120"/>
+        </Style>
+    </Page.Resources>
+    
+    <ListBox Background="#2F3136" BorderThickness="0">
+        <ListBox.ItemsPanel>
+            <ItemsPanelTemplate>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"/>
+            </ItemsPanelTemplate>
+        </ListBox.ItemsPanel>
 
-        <Button Grid.Column="1" Background="#A9AAAC" Content="Home"/>
-        <Button Grid.Column="3" Background="#A9AAAC" Content="Lala"/>
-        <Button Grid.Column="5" Background="#A9AAAC" Content="Lalala"/>
-    </Grid>
+        <Button Grid.Column="1" Content="Home" Click="ReturnHome"/>
+
+        <Button Grid.Column="5" Content="Профиль" Click="ReturnPlayer"/>
+    </ListBox>
 </Page>
