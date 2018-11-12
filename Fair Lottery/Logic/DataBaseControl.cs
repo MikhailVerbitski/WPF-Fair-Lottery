@@ -8,19 +8,6 @@ using System.Data.SQLite;
 
 namespace Fair_Lottery.Logic
 {
-    class Pair<T1, T2>
-    {
-        private T1 first;
-        private T2 second;
-        public T1 First { get { return first; } set { first = value; } }
-        public T2 Second { get { return second; } set { second = value; } }
-        public Pair() { }
-        public Pair(T1 first, T2 second)
-        {
-            this.first = first;
-            this.second = second;
-        }
-    }
     static class Table
     {
         static SQLiteConnection DBConnect = new SQLiteConnection(@"Data Source=..\..\..\DataBase\DataBase.db");
@@ -119,17 +106,17 @@ namespace Fair_Lottery.Logic
                 command.Parameters.Add("@namegame", System.Data.DbType.String).Value = NameGame;
                 return Convert.ToInt32(command.ExecuteScalar());
             }
-            public static Pair<int, string>[] GetNames(string GameName)
+            public static KeyValuePair<int, string>[] GetNames(string GameName)
             {
                 SQLiteCommand command = DBConnect.CreateCommand();
                 command.CommandText = "SELECT Name, ID_Items FROM Items WHERE Name_owner=@namegame";
                 command.Parameters.Add("@namegame", System.Data.DbType.String).Value = GameName;
                 reader = command.ExecuteReader();
-                Pair<int, string>[] Items = new Pair<int, string>[GetCountInGame(GameName)];
+                KeyValuePair<int, string>[] Items = new KeyValuePair<int, string>[GetCountInGame(GameName)];
                 for (int i = 0; i < Items.Length; i++)
                 {
                     reader.Read();
-                    Items[i] = new Pair<int, string>(Convert.ToInt32(reader["ID_Items"]), Convert.ToString(reader["Name"]));
+                    Items[i] = new KeyValuePair<int, string>(Convert.ToInt32(reader["ID_Items"]), Convert.ToString(reader["Name"]));
                 }
                 return Items;
             }

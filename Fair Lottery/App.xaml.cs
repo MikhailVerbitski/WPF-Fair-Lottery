@@ -10,14 +10,5 @@ namespace Fair_Lottery
 {
     public partial class App : Application
     {
-        public static void SwapWindows(Window Close, Window Open)
-        {
-            Open.Top = Close.Top;
-            Open.Left = Close.Left;
-            Open.Width = Close.ActualWidth;
-            Open.Height = Close.ActualHeight;
-            Open.Show();
-            Close.Close();
-        }
     }
 }

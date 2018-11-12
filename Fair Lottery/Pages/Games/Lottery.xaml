@@ -1,0 +1,144 @@
+﻿<Page x:Class="Fair_Lottery.Pages.Games.Lottery"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Fair_Lottery.Pages.Games"
+      mc:Ignorable="d" 
+      d:DesignHeight="300" d:DesignWidth="800"
+      Title="Lottery">
+
+    <Grid Grid.Row="1">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.8*"/>
+            <ColumnDefinition Width="10"/>
+            <ColumnDefinition Width="0.2*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="10"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="10"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="10"/>
+                <RowDefinition Height="25"/>
+                <RowDefinition Height="10"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="10"/>
+                <RowDefinition/>
+                <RowDefinition Height="10"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="4*"/>
+                <ColumnDefinition Width="39*"/>
+                <ColumnDefinition Width="14*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Row="1" Grid.Column="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2.5*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="2.5*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="2.5*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="2.5*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="2.5*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBox Grid.Column="0" FontSize="28" Name="InFirst" MaxLength="1" TextAlignment="Center"/>
+                <TextBox Grid.Column="2" FontSize="{Binding ElementName=InFirst,Path=FontSize}" Name="InSecond" MaxLength="1" TextAlignment="Center"/>
+                <TextBox Grid.Column="4" FontSize="{Binding ElementName=InFirst,Path=FontSize}" Name="InThird" MaxLength="1" TextAlignment="Center"/>
+                <TextBox Grid.Column="6" FontSize="{Binding ElementName=InFirst,Path=FontSize}" Name="InFourth" MaxLength="1" TextAlignment="Center"/>
+                <TextBox Grid.Column="8" FontSize="{Binding ElementName=InFirst,Path=FontSize}" Name="InFifth" MaxLength="1" TextAlignment="Center"/>
+            </Grid>
+
+            <Grid Grid.Row="1" Grid.Column="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <Button Grid.Row="0" Click="Button_Generate" Name="Generate">
+                    Сгенерировать
+                </Button>
+                <Button Grid.Row="1" Click="BuyTicket" Name="Buy">
+                    Купить билет
+                </Button>
+            </Grid>
+                
+            <Grid Grid.Column="1" Grid.Row="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="40"/>
+                </Grid.ColumnDefinitions>
+                    
+                <Slider VerticalAlignment="Center" ValueChanged="Slider_ValueChanged" Name="SliderBuyFew" IsSnapToTickEnabled="True"/>
+                <Label Grid.Column="1" Name="SliderCount" Content="0" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15"/>
+            </Grid>
+            <Button Grid.Column="2" Grid.Row="3" Click="BuyFew" Name="buyFew">
+                <TextBlock TextWrapping="Wrap" TextAlignment="Center">
+                    Купить несколько случайных билетов
+                </TextBlock>
+            </Button>
+
+            <Grid Grid.Row="5" Grid.Column="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <Label Grid.Column="0" Content="Вероятность выйгрыша:"/>
+                <Label Grid.Column="1" Content="0"/>
+            </Grid>
+
+            <Button Grid.Row="5" Grid.Column="2" Content="Розыгрыш" Click="Button_Raffle" Name="raffle"/>
+
+            <Label Grid.Row="7" Grid.Column="1" Visibility="Hidden" Name="TextWin" FontSize="21">
+                Выйграл билет под номером:
+            </Label>
+
+            <Label Grid.Row="7" Grid.Column="2" Name="winNum" Visibility="Hidden" FontSize="26"/>
+
+            <Grid Grid.Row="9" Grid.Column="1" Name="blabla" Visibility="Hidden">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="152"/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="41"/>
+                </Grid.RowDefinitions>
+
+                <Label Grid.Row="0" Content="Выйгрыш:" FontSize="16"/>
+                <Label Grid.Row="1" Content="Затраты на билеты:" FontSize="16"/>
+                <Label Grid.Row="2" Content="Итог:" FontSize="24"/>
+
+                <TextBlock Grid.Column="1" Grid.Row="0" Name="winnings" FontSize="16"/>
+                <TextBlock Grid.Column="1" Grid.Row="1" Name="Buys" FontSize="16"/>
+                <TextBlock Grid.Column="1" Grid.Row="2" Name="result" FontSize="24"/>
+            </Grid>
+
+            <Button Grid.Column="2" Grid.Row="9" Name="PlayAgain" Visibility="Hidden" Height="50" Content="Играть еще" Click="Restart_Click"/>
+        </Grid>
+
+        <Grid Grid.Column="2" Grid.Row="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="33"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Label HorizontalAlignment="Center" FontSize="16">
+                Купленные
+            </Label>
+            <StackPanel Grid.Row="1" Name="StackTickets">
+                <!--Тут будут купленные билеты-->
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Page>
