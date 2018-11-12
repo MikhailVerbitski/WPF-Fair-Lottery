@@ -24,7 +24,9 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
-        <Frame Grid.ColumnSpan="4" Content="{Binding ActuallyTop, Mode=TwoWay}">
+        <Frame Grid.ColumnSpan="4" 
+               Content="{Binding ActuallyTop, Mode=TwoWay}">
+            
             <Frame.Triggers>
                 <EventTrigger RoutedEvent="Loaded">
 
@@ -42,7 +44,9 @@
             </Frame.Triggers>
         </Frame>
 
-        <Frame Grid.ColumnSpan="3" Grid.Row="1" Grid.RowSpan="2" 
+        <Frame Grid.ColumnSpan="3" 
+               Grid.Row="1" 
+               Grid.RowSpan="2" 
                Content="{Binding ActuallyBody, Mode=TwoWay}"
                NavigationUIVisibility="Hidden"/>
 
@@ -56,7 +60,12 @@
             
         </Button>
 
-        <Frame Grid.ColumnSpan="4" Grid.Row="3" Content="{Binding ActuallyBottom, Mode=TwoWay}" Name="Bot">
+        <Frame Grid.ColumnSpan="4" 
+               Grid.Row="3" 
+               Content="{Binding ActuallyBottom, Mode=TwoWay}"
+               BorderThickness="0"
+               Name="Bot">
+            
             <Frame.Triggers>
                 <EventTrigger RoutedEvent="Loaded">
 

@@ -9,20 +9,24 @@
       Title="Hall">
 
     <Page.Resources>
-        <Style x:Key="testBtn" TargetType="Button">
+        <Style x:Key="GameButtons" TargetType="Button">
             <Style.Triggers>
-                
+
                 <EventTrigger RoutedEvent="MouseEnter">
                     <EventTrigger.Actions>
                         <BeginStoryboard>
                             <Storyboard Storyboard.TargetProperty="Background.Color">
-                                <ColorAnimation To="Red" Duration="0:0:0:10"></ColorAnimation>
+                                <ColorAnimation To="#506496" Duration="0:0:0:20"></ColorAnimation>
                             </Storyboard>
                         </BeginStoryboard>
                     </EventTrigger.Actions>
                 </EventTrigger>
-                
+
             </Style.Triggers>
+
+            <Setter Property="FontSize" Value="30"/>
+            <Setter Property="Background" Value="#BA5F26"/>
+            <Setter Property="BorderThickness" Value="0"/>
         </Style>
     </Page.Resources>
     
@@ -54,21 +58,15 @@
 
             <Button Grid.Row="0"
                     Grid.Column="0" 
-                    Background="#FE9505" 
-                    FontSize="30"
                     Name="ButtonLottery" 
                     Click="StartLottery"
-                    Style="{StaticResource testBtn}">
-                <TextBlock>Lottery</TextBlock>
-            </Button>
+                    Style="{StaticResource GameButtons}"
+                    Content="Lottery"/>
             <Button Grid.Column="0" Grid.Row="1"
-                    Background="#FE9505" 
                     Name="ButtonDice"
-                    FontSize="30"
                     Click="StartDice"
-                    Style="{StaticResource testBtn}">
-                <TextBlock>Dice</TextBlock>
-            </Button>
+                    Style="{StaticResource GameButtons}"
+                    Content="Dice"/>
         </Grid>
 
         <Grid Grid.Column="1" Grid.RowSpan="3">

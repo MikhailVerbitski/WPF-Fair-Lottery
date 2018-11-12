@@ -18,7 +18,8 @@
 
     <ListBox Background="#2F3136" 
              BorderThickness="0" 
-             ItemsSource="{Binding BottomPanelButtons}">
+             ItemsSource="{Binding BottomPanelButtons}"
+             ScrollViewer.VerticalScrollBarVisibility="Hidden">
 
         <ListBox.ItemsPanel>
             <ItemsPanelTemplate>
