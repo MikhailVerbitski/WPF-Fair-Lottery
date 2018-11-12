@@ -1,0 +1,26 @@
+F:\Cloud\Learn\Курсовая работа 3 семестр\Fair Lottery (Version 3.0)\Fair Lottery (Version 3.0)\bin\Debug\Fair Lottery (Version 3.0).exe.config
+F:\Cloud\Learn\Курсовая работа 3 семестр\Fair Lottery (Version 3.0)\Fair Lottery (Version 3.0)\bin\Debug\Fair Lottery (Version 3.0).exe
+F:\Cloud\Learn\Курсовая работа 3 семестр\Fair Lottery (Version 3.0)\Fair Lottery (Version 3.0)\bin\Debug\Fair Lottery (Version 3.0).pdb
+F:\Cloud\Learn\Курсовая работа 3 семестр\Fair Lottery (Version 3.0)\Fair Lottery (Version 3.0)\obj\Debug\Fair Lottery (Version 3.0).csprojResolveAssemblyReference.cache
+F:\Cloud\Learn\Курсовая работа 3 семестр\Fair Lottery (Version 3.0)\Fair Lottery (Version 3.0)\obj\Debug\App.g.cs
+F:\Cloud\Learn\Курсовая работа 3 семестр\Fair Lottery (Version 3.0)\Fair Lottery (Version 3.0)\obj\Debug\Fair Lottery (Version 3.0)_MarkupCompile.cache
+F:\Cloud\Learn\Курсовая работа 3 семестр\Fair Lottery (Version 3.0)\Fair Lottery (Version 3.0)\obj\Debug\Fair Lottery (Version 3.0)_MarkupCompile.lref
+F:\Cloud\Learn\Курсовая работа 3 семестр\Fair Lottery (Version 3.0)\Fair Lottery (Version 3.0)\obj\Debug\Fair Lottery (Version 3.0).g.resources
+F:\Cloud\Learn\Курсовая работа 3 семестр\Fair Lottery (Version 3.0)\Fair Lottery (Version 3.0)\obj\Debug\Fair_Lottery__Version_3._0_.Properties.Resources.resources
+F:\Cloud\Learn\Курсовая работа 3 семестр\Fair Lottery (Version 3.0)\Fair Lottery (Version 3.0)\obj\Debug\Fair Lottery (Version 3.0).csproj.GenerateResource.Cache
+F:\Cloud\Learn\Курсовая работа 3 семестр\Fair Lottery (Version 3.0)\Fair Lottery (Version 3.0)\obj\Debug\Fair Lottery (Version 3.0).csproj.CoreCompileInputs.cache
+F:\Cloud\Learn\Курсовая работа 3 семестр\Fair Lottery (Version 3.0)\Fair Lottery (Version 3.0)\obj\Debug\Fair Lottery (Version 3.0).exe
+F:\Cloud\Learn\Курсовая работа 3 семестр\Fair Lottery (Version 3.0)\Fair Lottery (Version 3.0)\obj\Debug\Fair Lottery (Version 3.0).pdb
+F:\Cloud\Learn\Курсовая работа 3 семестр\Fair Lottery (Version 3.0)\Fair Lottery (Version 3.0)\obj\Debug\Windows\Authentication.g.cs
+F:\Cloud\Learn\Курсовая работа 3 семестр\Fair Lottery (Version 3.0)\Fair Lottery (Version 3.0)\obj\Debug\Windows\Hall.g.cs
+F:\Cloud\Learn\Курсовая работа 3 семестр\Fair Lottery (Version 3.0)\Fair Lottery (Version 3.0)\obj\Debug\Windows\MainWindow.g.cs
+F:\Cloud\Learn\Курсовая работа 3 семестр\Fair Lottery (Version 3.0)\Fair Lottery (Version 3.0)\obj\Debug\Windows\Registration.g.cs
+F:\Cloud\Learn\Курсовая работа 3 семестр\Fair Lottery (Version 3.0)\Fair Lottery (Version 3.0)\obj\Debug\Windows\Authentication.baml
+F:\Cloud\Learn\Курсовая работа 3 семестр\Fair Lottery (Version 3.0)\Fair Lottery (Version 3.0)\obj\Debug\Windows\Hall.baml
+F:\Cloud\Learn\Курсовая работа 3 семестр\Fair Lottery (Version 3.0)\Fair Lottery (Version 3.0)\obj\Debug\Windows\MainWindow.baml
+F:\Cloud\Learn\Курсовая работа 3 семестр\Fair Lottery (Version 3.0)\Fair Lottery (Version 3.0)\obj\Debug\Windows\Registration.baml
+F:\Cloud\Learn\Курсовая работа 3 семестр\Fair Lottery (Version 3.0)\Fair Lottery (Version 3.0)\obj\Debug\Windows\Authorization.g.cs
+F:\Cloud\Learn\Курсовая работа 3 семестр\Fair Lottery (Version 3.0)\Fair Lottery (Version 3.0)\obj\Debug\Windows\Authorization.baml
+F:\Cloud\Learn\Курсовая работа 3 семестр\Fair Lottery (Version 3.0)\Fair Lottery (Version 3.0)\bin\Debug\System.Data.SQLite.dll
+F:\Cloud\Learn\Курсовая работа 3 семестр\Fair Lottery (Version 3.0)\Fair Lottery (Version 3.0)\bin\Debug\System.Data.SQLite.xml
+F:\Cloud\Learn\Курсовая работа 3 семестр\Fair Lottery (Version 3.0)\Fair Lottery (Version 3.0)\bin\Debug\System.Data.SQLite.dll.config
