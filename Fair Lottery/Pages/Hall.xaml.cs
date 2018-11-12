@@ -21,6 +21,7 @@ namespace Fair_Lottery.Pages
         {
             InitializeComponent();
             DataContext = mainViewModel;
+            mainViewModel.RefreshLastGame();
         }
 
         private void StartLottery(object sender, RoutedEventArgs e)

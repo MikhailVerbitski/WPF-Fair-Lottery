@@ -22,10 +22,6 @@ namespace Fair_Lottery.Pages
             InitializeComponent();
             DataContext = mainViewModel;
         }
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            (DataContext as ViewModel.MainViewModel).VMPlayer = Logic.Persone.GetPlayer(true, Login.Text, Pass.Password);
-            (DataContext as ViewModel.MainViewModel).ActuallyBody = new Player(DataContext as ViewModel.MainViewModel);
-        }
+        private void Button_Click(object sender, RoutedEventArgs e) => (DataContext as ViewModel.MainViewModel).AuthorizationClick(Login.Text, Pass.Password);
     }
 }

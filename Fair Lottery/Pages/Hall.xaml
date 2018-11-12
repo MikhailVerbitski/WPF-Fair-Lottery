@@ -10,20 +10,6 @@
 
     <Page.Resources>
         <Style x:Key="GameButtons" TargetType="Button">
-            <Style.Triggers>
-
-                <EventTrigger RoutedEvent="MouseEnter">
-                    <EventTrigger.Actions>
-                        <BeginStoryboard>
-                            <Storyboard Storyboard.TargetProperty="Background.Color">
-                                <ColorAnimation To="#506496" Duration="0:0:0:20"></ColorAnimation>
-                            </Storyboard>
-                        </BeginStoryboard>
-                    </EventTrigger.Actions>
-                </EventTrigger>
-
-            </Style.Triggers>
-
             <Setter Property="FontSize" Value="30"/>
             <Setter Property="Background" Value="#BA5F26"/>
             <Setter Property="BorderThickness" Value="0"/>
@@ -41,7 +27,7 @@
             <ColumnDefinition  MinWidth="250" Width="0.3*"/>
         </Grid.ColumnDefinitions>
 
-        <Label FontSize="28" 
+        <Label FontSize="36" 
                Foreground="#D8D8DB" 
                Content="Доступные игры" 
                VerticalAlignment="Bottom"/>
@@ -69,20 +55,24 @@
                     Content="Dice"/>
         </Grid>
 
-        <Grid Grid.Column="1" Grid.RowSpan="3">
+        <Grid Grid.Column="1"
+              Grid.RowSpan="3">
             <Grid.RowDefinitions>
-                <RowDefinition Height="35"/>
+                <RowDefinition Height="45"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
 
             <Label Grid.Row="0" 
-                   FontSize="18" 
-                   HorizontalAlignment="Center" 
-                   Content="Результаты недавних игр"/>
+                       FontSize="24" 
+                       Foreground="#DF5006"
+                       HorizontalAlignment="Center" 
+                       Content="Недавние игры"/>
             <ListBox Grid.Row="1" 
-                     Background="#36393E" 
-                     BorderThickness="0"
-                     ItemsSource="{Binding LastGames, Mode=TwoWay}"/>
+                         Background="#36393E" 
+                         FontSize="18"
+                         BorderThickness="0"
+                         Foreground="#E4E4D8"
+                         ItemsSource="{Binding LastGames}"/>
         </Grid>
     </Grid>
 </Page>

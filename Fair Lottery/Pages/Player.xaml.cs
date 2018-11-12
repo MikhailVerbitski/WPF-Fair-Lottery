@@ -22,15 +22,5 @@ namespace Fair_Lottery.Pages
             InitializeComponent();
             DataContext = mainViewModel;
         }
-
-        private void AuthorizationClick(object sender, RoutedEventArgs e)
-        {
-            (DataContext as ViewModel.MainViewModel).ActuallyBody = new Authorization(DataContext as ViewModel.MainViewModel);
-        }
-
-        private void RegistrationClick(object sender, RoutedEventArgs e)
-        {
-            (DataContext as ViewModel.MainViewModel).ActuallyBody = new Registration(DataContext as ViewModel.MainViewModel);
-        }
     }
 }

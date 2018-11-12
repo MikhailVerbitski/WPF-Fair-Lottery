@@ -73,7 +73,7 @@
                 <EventTrigger RoutedEvent="Loaded">
 
                     <BeginStoryboard>
-                        <Storyboard Timeline.DesiredFrameRate="60">
+                        <Storyboard Timeline.DesiredFrameRate="50">
                             <DoubleAnimation Storyboard.TargetProperty="Height"
                                              From="0"
                                              To="60"

@@ -22,17 +22,6 @@ namespace Fair_Lottery.Pages
             InitializeComponent();
             DataContext = mainViewModel;
         }
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            if (Logic.Table.Persone.CheckPersone(Login.Text))
-            {
-                HiddenBlock.Visibility = Visibility.Visible;
-            }
-            else
-            {
-                (DataContext as ViewModel.MainViewModel).VMPlayer = new Logic.Persone(Logic.Table.Persone.CreatePersone(Login.Text, Pass.Password), Login.Text, Pass.Password);
-                (DataContext as ViewModel.MainViewModel).ActuallyBody = new Player(DataContext as ViewModel.MainViewModel);
-            }
-        }
+        private void Button_Click(object sender, RoutedEventArgs e) => (DataContext as ViewModel.MainViewModel).RegistrationClick(Login.Text, Pass.Password);
     }
 }

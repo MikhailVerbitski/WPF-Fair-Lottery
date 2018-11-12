@@ -1,31 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-
 using System.ComponentModel;
-using System.Runtime.CompilerServices;
-
 using System.Collections.ObjectModel;
+using Microsoft.Win32;
 
 namespace Fair_Lottery.ViewModel
 {
-    abstract class GameViewModel
-    {
-        protected Game game;
-        public Logic.Player GetPlayer { get { return game.mainViewModel.VMPlayer; } set { game.mainViewModel.VMPlayer = value; } }
-        public decimal GetBalance { get { return game.mainViewModel.Balance; } set { game.mainViewModel.Balance = value; } }
-
-        public GameViewModel(Game game)
-        {
-            this.game = game;
-        }
-    }
     class MainViewModel : INotifyPropertyChanged
     {
         private Logic.Player player = new Logic.Guest();
@@ -47,7 +30,6 @@ namespace Fair_Lottery.ViewModel
                 balance = player.Money;
                 OnPropertyChanged("Balance");
                 OnPropertyChanged("VMPlayer");
-
             }
         }
         public decimal Balance
@@ -90,7 +72,7 @@ namespace Fair_Lottery.ViewModel
         {
             get
             {
-                return (player.ID == -42) ? new ObservableCollection<Logic.GameInfo>() : Logic.Table.Raffle.GetLastGameInfo(player.ID);
+                return (player.ID == -42) ? new ObservableCollection<Logic.GameInfo>() : Logic.Table.GetLastGameInfo(player.ID);
             }
         }
         public ObservableCollection<Logic.GameInfo> LastGames
@@ -102,7 +84,6 @@ namespace Fair_Lottery.ViewModel
                 OnPropertyChanged("LastGames");
             }
         }
-
         public void AddGame(GamesEnum game)
         {
             games.Add(new Game(game, this));
@@ -116,7 +97,7 @@ namespace Fair_Lottery.ViewModel
             actuallyBottom = new Pages.BottomPanel(this);
             actuallyBody = new Pages.Hall(this);
 
-            lastGames = Logic.Table.Raffle.GetLastGameInfo();
+            lastGames = Logic.Table.GetLastGameInfo();
             Balance = player.Money;
 
 
@@ -129,7 +110,64 @@ namespace Fair_Lottery.ViewModel
 
             bottomPanelButtons.Add(Home);
             bottomPanelButtons.Add(Player);
+
+            VisibilityTextRegistration = Visibility.Hidden;
         }
+        public void RefreshLastGame() => LastGames = Logic.Table.GetLastGameInfo();
+
+        ////Player  //////////////////////////////////////////////////////////////////////////////////
+        public Command Authorization { get { return new Command( obj => ActuallyBody = new Pages.Authorization(this) ); } }
+        public void AuthorizationClick(string Login, string Pass)
+        {
+            VMPlayer = Logic.Persone.GetPlayer(true, Login, Pass);
+            ActuallyBody = new Pages.Player(this);
+        }
+        public Visibility VisibilityTextRegistration { get; set; }
+        public void RegistrationClick(string Login, string Pass)
+        {
+            if (Logic.Table.CheckPersone(Login))
+            {
+                VisibilityTextRegistration = Visibility.Visible;
+            }
+            else
+            {
+                VMPlayer = new Logic.Persone(Logic.Table.CreatePersone(Login, Pass), Login, Pass);
+                ActuallyBody = new Pages.Player(this);
+            }
+        }
+        public Command Registration { get { return new Command(obj => ActuallyBody = new Pages.Registration(this) ); } }
+        public Command Serialization
+        {
+            get
+            {
+                return new Command(obj => {
+                    if (player is Logic.Guest)
+                    {
+                        MessageBox.Show("Нельзя сохранить гостя!");
+                        return;
+                    }
+                    SaveFileDialog saveFileDialog = new SaveFileDialog();
+                    saveFileDialog.Filter = "Fair_Lottery_Player |*.FLPlayer";
+                    saveFileDialog.Title = "Сохранить пользователя";
+                    saveFileDialog.ShowDialog();
+                    (player as Logic.Persone).Serializ(saveFileDialog.FileName);
+                });
+            }
+        }
+        public Command Deserialization
+        {
+            get
+            {
+                return new Command(obj => {
+                    OpenFileDialog openFileDialog = new OpenFileDialog();
+                    openFileDialog.Filter = "Fair_Lottery_Player |*.FLPlayer";
+                    openFileDialog.ShowDialog();
+                    if(openFileDialog.FileName != "")
+                        VMPlayer = Logic.Persone.Deserializ(openFileDialog.FileName);
+                });
+            }
+        }
+        //////////////////////////////////////////////////////////////////////////////////////////////
 
         private ObservableCollection<Button> bottomPanelButtons = new ObservableCollection<Button>();
         public ObservableCollection<Button> BottomPanelButtons
@@ -154,28 +192,51 @@ namespace Fair_Lottery.ViewModel
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
+    enum GamesEnum
+    {
+        Dice,
+        Lottery
+    }
+    abstract class GameViewModel
+    {
+        protected Game game;
+        public Logic.Player GetPlayer { get { return game.mainViewModel.VMPlayer; } set { game.mainViewModel.VMPlayer = value; } }
+        public decimal GetBalance { get { return game.mainViewModel.Balance; } set { game.mainViewModel.Balance = value; } }
+        public Command GameDie { get { return game.Die; } }
+        public Command Restart { get { return game.Restart; } }
+        public Command Raffle { get { return game.Raffle; } }
+
+        public GameViewModel(Game game) { this.game = game; }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        public void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+    }
     class Game
     {
+        GamesEnum GetGamesEnum { get; }
         public Logic.Game LogicGame;
         public GameViewModel GameViewModel;
         public MainViewModel mainViewModel;
         public Page page;
         public Button GameButton = new Button();
-
         public Game(GamesEnum games, MainViewModel mainViewModel)
         {
             this.mainViewModel = mainViewModel;
+            this.GetGamesEnum = games;
             if(games == GamesEnum.Dice)
             {
                 GameViewModel = new DiceViewModel(this);
                 LogicGame = new Logic.Dice(GameViewModel);
-                page = new Pages.Games.Dice(GameViewModel as DiceViewModel);
+                page = new Pages.Dice(GameViewModel as DiceViewModel);
             }
             else if(games == GamesEnum.Lottery)
             {
                 GameViewModel = new LotteryViewModel(this);
                 LogicGame = new Logic.Lottery(GameViewModel);
-                page = new Pages.Games.Lottery(GameViewModel as LotteryViewModel);
+                page = new Pages.Lottery(GameViewModel as LotteryViewModel);
             }
 
             GameButton.Content = LogicGame.Name;
@@ -183,14 +244,31 @@ namespace Fair_Lottery.ViewModel
             mainViewModel.ActuallyBody = page;
             mainViewModel.AddButtons(GameButton);
         }
+        public Command Restart
+        {
+            get
+            {
+                return new ViewModel.Command(obj => {
+                    this.GameViewModel = (GetGamesEnum == GamesEnum.Dice) ? new DiceViewModel(this) : new LotteryViewModel(this) as GameViewModel;
+                    this.LogicGame = (GetGamesEnum == GamesEnum.Dice) ? new Logic.Dice(GameViewModel) : new Logic.Lottery(GameViewModel) as Logic.Game;
+                    this.page = (GetGamesEnum == GamesEnum.Dice) ? new Pages.Dice(GameViewModel as ViewModel.DiceViewModel) : new Pages.Lottery(GameViewModel as ViewModel.LotteryViewModel) as Page;
+                    this.mainViewModel.ActuallyBody = this.page;
+                });
+            }
+        }
+        public Command Die
+        {
+            get
+            {
+                return new Command((obj) => {
+                    this.mainViewModel.BottomPanelButtons.Remove(this.GameButton);
+                    this.mainViewModel.OnPropertyChanged("BottomPanelButtons");
+                    this.mainViewModel.ActuallyBody = new Pages.Hall(this.mainViewModel);
+                });
+            }
+        }
+        public Command Raffle { get { return new Command(obj => this.LogicGame.Raffle(obj)); } }
     }
-
-    enum GamesEnum
-    {
-        Dice,
-        Lottery
-    }
-
     class Command : ICommand
     {
         private Action<object> execute;
@@ -207,18 +285,15 @@ namespace Fair_Lottery.ViewModel
                 CommandManager.RequerySuggested -= value;
             }
         }
-
         public Command(Action<object> execute, Func<object, bool> canExecute = null)
         {
             this.execute = execute;
             this.canExecute = canExecute;
         }
-
         public bool CanExecute(object parameter)
         {
             return this.canExecute == null || this.canExecute(parameter);
         }
-
         public void Execute(object parameter)
         {
             this.execute(parameter);

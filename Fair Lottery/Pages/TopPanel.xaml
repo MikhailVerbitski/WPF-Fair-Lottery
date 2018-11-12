@@ -10,7 +10,7 @@
 
     <Grid Background="#202225">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="250"/>
             <ColumnDefinition/>
             <ColumnDefinition/>
             <ColumnDefinition Width="85"/>
@@ -18,7 +18,7 @@
         </Grid.ColumnDefinitions>
 
         <Label Content="Здравствуйте"
-                FontSize="17"
+                FontSize="22"
                 Foreground="#DF5006"/>
         <Label Grid.Column="0"
                Content="{Binding VMPlayer.Name}"
@@ -26,12 +26,12 @@
                HorizontalAlignment="Right"
                VerticalAlignment="Bottom"
                Foreground="#DF5006"/>
-        <Label Grid.ColumnSpan="5" 
-            Foreground="#FE9505" 
-            FontSize="36" 
-            HorizontalAlignment="Center" 
-            Content="Fair Lottery" 
-            RenderTransformOrigin="0.5,0.5">
+        <Label  Grid.ColumnSpan="5"
+                Foreground="#FE9505" 
+                FontSize="36" 
+                HorizontalAlignment="Center" 
+                Content="Fair Lottery" 
+                RenderTransformOrigin="0.5,0.5">
 
             <Label.RenderTransform>
                 <RotateTransform x:Name="AnimatedRotateTransform" Angle="0" />
@@ -52,7 +52,7 @@
                                     RepeatBehavior="Forever"/>
                             </Storyboard>
                         </BeginStoryboard>
-                        
+
                     </EventTrigger.Actions>
                 </EventTrigger>
             </Label.Triggers>

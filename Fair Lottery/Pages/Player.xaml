@@ -8,6 +8,18 @@
       d:DesignHeight="600" d:DesignWidth="800"
       Title="Player">
 
+    <Page.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Height" Value="50"/>
+            <Setter Property="Background" Value="#1C1C1C"/>
+            <Setter Property="Width" Value="180"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Foreground" Value="#DF5006"/>
+            <Setter Property="FontSize" Value="22"/>
+            <Setter Property="Margin" Value="5"/>
+        </Style>
+    </Page.Resources>
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -16,66 +28,69 @@
 
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="0.2*"/>
+                <ColumnDefinition Width="15"/>
                 <ColumnDefinition Width="120"/>
-                <ColumnDefinition Width="140"/>
+                <ColumnDefinition MinWidth="140" Width="0.7*"/>
                 <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition Width="0.2*"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="0.2*"/>
-                <RowDefinition Height="120"/>
+                <RowDefinition Height="15"/>
+                <RowDefinition Height="60"/>
+                <RowDefinition Height="60"/>
                 <RowDefinition Height="50"/>
-                <RowDefinition Height="90"/>
                 <RowDefinition/>
-                <RowDefinition Height="0.2*"/>
             </Grid.RowDefinitions>
 
             <Image Grid.Column="1"
                    Grid.Row="1"
+                   Grid.RowSpan="2"
                    HorizontalAlignment="Right"
                    Source="pack://siteoforigin:,,,/Resource/if_caution_attention_person_user_account_profile_1083154.png"/>
             <Label Grid.Column="2"
-                   Grid.Row="1"
+                   Grid.Row="2"
                    VerticalAlignment="Bottom"
                    HorizontalAlignment="Left"
                    FontSize="38"
                    Content="{Binding VMPlayer.Name}"/>
             <Label Grid.Column="1"
-                   Grid.Row="2"
+                   Grid.Row="3"
                    FontSize="30"
                    HorizontalAlignment="Right"
                    Content="Money: "/>
             <Label Grid.Column="2"
-                   Grid.Row="2"
+                   Grid.Row="3"
                    FontSize="30"
                    HorizontalAlignment="Left"
                    Content="{Binding VMPlayer.Money}"/>
 
-            <Button Grid.Column="3"
-                    Grid.Row="1"
-                    Content="Авторизация"
-                    Click="AuthorizationClick"/>
-            <Button Grid.Column="4"
-                    Grid.Row="1"
-                    Content="Регистрация"
-                    Click="RegistrationClick"/>
+            <StackPanel Grid.Column="3" Grid.Row="1" Grid.RowSpan="4">
+                <Button Content="Авторизация"
+                        Command="{Binding Authorization}"/>
+                <Button Content="Регистрация"
+                        Command="{Binding Registration}"/>
+                <Button Content="Cериализовать"
+                        Command="{Binding Serialization}"/>
+                <Button Content="Десериализовать"
+                        Command="{Binding Deserialization}"/>
+            </StackPanel>
         </Grid>
 
         <Grid Grid.Column="1">
             <Grid.RowDefinitions>
-                <RowDefinition Height="35"/>
+                <RowDefinition Height="45"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
 
-            <Label Grid.Row="0" 
-                   FontSize="18" 
+            <Label Grid.Row="0"
+                   FontSize="24" 
+                   Foreground="#DF5006"
                    HorizontalAlignment="Center" 
                    Content="Результаты недавних игр"/>
             <ListBox Grid.Row="1" 
                      Background="#36393E" 
                      BorderThickness="0"
+                     FontSize="18"
+                     Foreground="#E4E4D8"
                      ItemsSource="{Binding LastGamePlayer}"/>
         </Grid>
     </Grid>

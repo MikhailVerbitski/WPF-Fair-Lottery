@@ -34,10 +34,15 @@
         </TextBlock>
         <TextBox Name="Login" Grid.Column="3" Grid.Row="1"/>
         <PasswordBox Name="Pass" Grid.Column="3" Grid.Row="3" PasswordChar="1"/>
-        <Button Grid.Column="3" Grid.Row="5" Click="Button_Click">
-            OK
-        </Button>
-        <TextBlock Foreground="Red" Grid.Column="3" Grid.Row="6" Grid.ColumnSpan="2" Visibility="Hidden" Name="HiddenBlock">
+        <Button Grid.Column="3" 
+                Grid.Row="5" 
+                Click="Button_Click"
+                Content="OK"/>
+        <TextBlock Foreground="Red" 
+                   Grid.Column="3" 
+                   Grid.Row="6" 
+                   Grid.ColumnSpan="2" 
+                   Visibility="{Binding VisibilityTextRegistration}">
             Пользователь с таким именем уже существует!!!
         </TextBlock>
     </Grid>

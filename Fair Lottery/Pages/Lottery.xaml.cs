@@ -13,11 +13,11 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Fair_Lottery.Pages.Games
+namespace Fair_Lottery.Pages
 {
-    public partial class Dice : Page
+    public partial class Lottery : Page
     {
-        internal Dice(ViewModel.DiceViewModel mainViewModel)
+        internal Lottery(ViewModel.LotteryViewModel mainViewModel)
         {
             InitializeComponent();
             DataContext = mainViewModel;
