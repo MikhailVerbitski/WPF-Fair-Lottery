@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 using System.Windows;
 
 namespace Fair_Lottery.Logic
@@ -78,7 +74,6 @@ namespace Fair_Lottery.Logic
             mainViewModel.DiceProbability = Math.Round(Convert.ToDouble(mainViewModel.DiceProbability) * 100, 1) + "%";
         }
     }
-
     class Lottery : Game
     {
         public string Name { get { return "Lottery"; } }

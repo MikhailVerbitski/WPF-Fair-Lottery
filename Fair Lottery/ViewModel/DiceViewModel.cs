@@ -1,16 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Input;
-
+﻿using System.Windows;
 using System.ComponentModel;
-using System.Runtime.CompilerServices;
-
 using System.Collections.ObjectModel;
 
 namespace Fair_Lottery.ViewModel
@@ -51,6 +40,7 @@ namespace Fair_Lottery.ViewModel
                 OnPropertyChanged("DiceSlider");
             }
         }
+
         private double diceSliderMaximum;
         public double DiceSliderMaximum
         {
@@ -129,53 +119,8 @@ namespace Fair_Lottery.ViewModel
         }
 
         private Command diceBuy;
-        public Command DiceBuy
-        {
-            get
-            {
-                return diceBuy ?? (diceBuy = new Command( (game.LogicGame as Logic.Dice).Buy) );
-            }
-        }
-
-        private Command diceRestart;
-        public Command DiceRestart
-        {
-            get
-            {
-                return diceRestart ?? (diceRestart = new Command(obj => {
-                    game.GameViewModel = new DiceViewModel(game);
-                    game.LogicGame = new Logic.Dice(game.GameViewModel);
-                    game.page = new Pages.Games.Dice(game.GameViewModel as ViewModel.DiceViewModel);
-                    game.mainViewModel.ActuallyBody = game.page;
-                }));
-            }
-        }
-
+        public Command DiceBuy { get { return diceBuy ?? (diceBuy = new Command( (game.LogicGame as Logic.Dice).Buy) ); } }
         private Command diceMakeBet;
-        public Command DiceMakeBet
-        {
-            get
-            {
-                return diceMakeBet ?? (diceMakeBet = new Command((game.LogicGame as Logic.Dice).MakeBet));
-            }
-        }
-
-        public Command GameDie
-        {
-            get
-            {
-                return new Command((obj) => {
-                    game.mainViewModel.BottomPanelButtons.Remove(game.GameButton);
-                    game.mainViewModel.OnPropertyChanged("BottomPanelButtons");
-                    game.mainViewModel.ActuallyBody = new Pages.Hall(game.mainViewModel);
-                });
-            }
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        public void OnPropertyChanged(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
+        public Command DiceMakeBet { get { return diceMakeBet ?? (diceMakeBet = new Command((game.LogicGame as Logic.Dice).MakeBet)); } }
     }
 }
