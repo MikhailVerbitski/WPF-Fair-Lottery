@@ -1,5 +1,17 @@
-﻿using System.Windows;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
+
 using System.ComponentModel;
+using System.Runtime.CompilerServices;
+
+using System.Collections.ObjectModel;
 
 namespace Fair_Lottery.ViewModel
 {
@@ -116,6 +128,29 @@ namespace Fair_Lottery.ViewModel
             }
         }
 
+        private Command lotteyRestart;
+        public Command LotteryRestart
+        {
+            get
+            {
+                return lotteyRestart ?? (lotteyRestart = new Command(obj => {
+                    game.GameViewModel = new LotteryViewModel(game);
+                    game.LogicGame = new Logic.Lottery(game.GameViewModel);
+                    game.page = new Pages.Games.Lottery(game.GameViewModel as ViewModel.LotteryViewModel);
+                    game.mainViewModel.ActuallyBody = game.page;
+                }));
+            }
+        }
+
+        private Command lotteryRaffle;
+        public Command LotteryRaffle
+        {
+            get
+            {
+                return lotteryRaffle ?? (lotteryRaffle = new Command((game.LogicGame as Logic.Lottery).Button_Raffle));
+            }
+        }
+
         private Command lotteryBuyFew;
         public Command LotteryBuyFew
         {
@@ -141,6 +176,24 @@ namespace Fair_Lottery.ViewModel
             {
                 return lotteryGenerateNumber ?? (lotteryGenerateNumber = new Command((game.LogicGame as Logic.Lottery).Button_Generate));
             }
+        }
+
+        public Command GameDie
+        {
+            get
+            {
+                return new Command((obj) => {
+                    game.mainViewModel.BottomPanelButtons.Remove(game.GameButton);
+                    game.mainViewModel.OnPropertyChanged("BottomPanelButtons");
+                    game.mainViewModel.ActuallyBody = new Pages.Hall(game.mainViewModel);
+                });
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        public void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

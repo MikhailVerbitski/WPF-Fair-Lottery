@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Cloud\programming\Project\Fair Lottery 8.2\Fair Lottery\obj\Debug\
+C:\DiskInDiske\Cloud\programming\Project\Fair Lottery 8.2\Fair Lottery\obj\Debug\
 Fair_Lottery
 none
 false
 DEBUG;TRACE
-C:\Cloud\programming\Project\Fair Lottery 8.2\Fair Lottery\App.xaml
-9-1316528347
+C:\DiskInDiske\Cloud\programming\Project\Fair Lottery 8.2\Fair Lottery\App.xaml
+9-1775729445
 
-19133313102
-14-1950576527
-MainWindow.xaml;Pages\Authorization.xaml;Pages\BottomPanel.xaml;Pages\Dice.xaml;Pages\Hall.xaml;Pages\Lottery.xaml;Pages\Player.xaml;Pages\Registration.xaml;Pages\TopPanel.xaml;
+191934626125
+14-701810648
+MainWindow.xaml;Pages\Authorization.xaml;Pages\BottomPanel.xaml;Pages\Games\Dice.xaml;Pages\Games\Lottery.xaml;Pages\Hall.xaml;Pages\Player.xaml;Pages\Registration.xaml;Pages\TopPanel.xaml;
 
 False
 

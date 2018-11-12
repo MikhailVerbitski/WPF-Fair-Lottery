@@ -22,6 +22,7 @@ namespace Fair_Lottery.Pages
             InitializeComponent();
             DataContext = mainViewModel;
         }
+
         private void Button_Click(object sender, RoutedEventArgs e) => (DataContext as ViewModel.MainViewModel).RegistrationClick(Login.Text, Pass.Password);
     }
 }

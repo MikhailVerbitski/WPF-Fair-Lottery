@@ -1,4 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 
@@ -25,16 +29,16 @@ namespace Fair_Lottery.Logic
         {
             if(AuthorizationOrRegistration)
             {
-                int ID = Logic.Table.FindPersone(Name, Pass);
-                decimal Money = Logic.Table.GetMoney(ID);
+                int ID = Logic.Table.Persone.FindPersone(Name, Pass);
+                decimal Money = Logic.Table.Persone.GetMoney(ID);
                 return new Persone(ID, Name, Pass, Money);
             }
             else
             {
-                if (Logic.Table.CheckPersone(Name))
+                if (Logic.Table.Persone.CheckPersone(Name))
                     throw new Exception("Пользователь уже существует");
-                int ID = Logic.Table.CreatePersone(Name, Pass);
-                decimal Money = Logic.Table.GetMoney(ID);
+                int ID = Logic.Table.Persone.CreatePersone(Name, Pass);
+                decimal Money = Logic.Table.Persone.GetMoney(ID);
                 return new Persone(ID, Name, Pass, Money);
             }
         }
@@ -52,7 +56,7 @@ namespace Fair_Lottery.Logic
         {
             string Name;
             decimal Money;
-            Table.FindPersone(ID, out Name, out Pass, out Money);
+            Table.Persone.FindPersone(ID, out Name, out Pass, out Money);
             this.Name = Name;
             this.Money = Money;
         }
@@ -68,7 +72,7 @@ namespace Fair_Lottery.Logic
             Persone persone;
             using (FileStream file = new FileStream(Way, FileMode.Open))
                 persone = binaryFormatter.Deserialize(file) as Persone;
-            persone.Money = Logic.Table.GetMoney(persone.ID);
+            Logic.Table.Persone.UpdateMoney(persone.ID, persone.Money - Table.Persone.GetMoney(persone.ID));
             return persone;
         }
     }

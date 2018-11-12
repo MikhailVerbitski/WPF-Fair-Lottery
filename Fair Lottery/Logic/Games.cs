@@ -1,5 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
 using System.Windows;
 
 namespace Fair_Lottery.Logic
@@ -7,11 +11,11 @@ namespace Fair_Lottery.Logic
     interface Game
     {
         string Name { get; }
-        void Raffle(object obj);
     }
     class Dice : Game
     {
         public string Name { get { return "Dice"; } }
+
         private ViewModel.DiceViewModel mainViewModel;
         private static int ID_Name = 2;
 
@@ -20,12 +24,12 @@ namespace Fair_Lottery.Logic
             this.mainViewModel = mainViewModel as ViewModel.DiceViewModel;
             this.mainViewModel.DiceSliderMaximum = Convert.ToDouble(mainViewModel.GetPlayer.Money);
         }
-        public void Raffle(object obj)
+        public void MakeBet(object obj)
         {
             decimal result = 0;
             decimal Ratio = 3;
             int WinNum = new Random(DateTime.Now.Millisecond).Next(1, 6);
-            int ID_Raffle = Table.CreateRaffle(mainViewModel.GetPlayer.ID, WinNum, ID_Name);
+            int ID_Raffle = Table.Raffle.CreateRaffle(mainViewModel.GetPlayer.ID, WinNum, ID_Name);
             int[] ID = new int[6] { 1, 2, 3, 4, 5, 6 };
             string[] buttons = new string[6] { "pack://siteoforigin:,,,/Resource/Dice_One.png",
                                              "pack://siteoforigin:,,,/Resource/Dice_Two.png",
@@ -36,21 +40,21 @@ namespace Fair_Lottery.Logic
             for (int i = 0; i < 6; i++)
                 if (mainViewModel.Rates[i] > 0)
                 {
-                    Table.CreateBet(ID[i], ID_Raffle, mainViewModel.Rates[i], ID[i]);
+                    Table.Bet.CreateBet(ID[i], ID_Raffle, mainViewModel.Rates[i], ID[i]);
                     result -= mainViewModel.Rates[i];
                     result += (WinNum == ID[i]) ? mainViewModel.Rates[i] * Ratio : 0;
                 }
 
             if (mainViewModel.GetPlayer is Persone)
             {
-                Table.UpdateMoney(mainViewModel.GetPlayer.ID, result);
+                Table.Persone.UpdateMoney(mainViewModel.GetPlayer.ID, result);
                 (mainViewModel.GetPlayer as Persone).Refresh();
             }
             else
             {
                 (mainViewModel.GetPlayer as Guest).Money += result;
             }
-            Table.SetResult(ID_Raffle, result);
+            Table.Raffle.SetResult(ID_Raffle, result);
 
             mainViewModel.WinImageSource = buttons[WinNum - 1];
             mainViewModel.Result = result.ToString();
@@ -74,6 +78,7 @@ namespace Fair_Lottery.Logic
             mainViewModel.DiceProbability = Math.Round(Convert.ToDouble(mainViewModel.DiceProbability) * 100, 1) + "%";
         }
     }
+
     class Lottery : Game
     {
         public string Name { get { return "Lottery"; } }
@@ -110,21 +115,21 @@ namespace Fair_Lottery.Logic
             mainViewModel.LotterySliderMaximum = Convert.ToDouble(mainViewModel.GetPlayer.Money - Bet);
             mainViewModel.PurchasedTickets = Tickets;
         }
-        public void Raffle(object obj)
+        public void Button_Raffle(object obj)
         {
             int WinNum = new Random(DateTime.Now.Millisecond).Next(0, 99999);
-            int ID_Raffle = Table.CreateRaffle(mainViewModel.GetPlayer.ID, WinNum, ID_Name);
+            int ID_Raffle = Table.Raffle.CreateRaffle(mainViewModel.GetPlayer.ID, WinNum, ID_Name);
 
             //foreach (int num in Tickets)
             //    Table.Bet.CreateBet(7, ID_Raffle, price, num);
-            Table.CreateBet(7, ID_Raffle, price, (Tickets.Where(n => n == WinNum).Count() > 0) ? Tickets.Where(n => n == WinNum).First() : Tickets.First());
+            Table.Bet.CreateBet(7, ID_Raffle, price, (Tickets.Where(n => n == WinNum).Count() > 0) ? Tickets.Where(n => n == WinNum).First() : Tickets.First());
             //  Заменено из-за большого потребления памяти
 
             decimal Winnings = (Tickets.Where(n => n == WinNum).Count() > 0) ? 50000m : 0;
             decimal Result = Winnings - Bet;
             mainViewModel.GetPlayer.Money += Result;
-            Table.UpdateMoney(mainViewModel.GetPlayer.ID, Result);
-            Table.SetResult(ID_Raffle, Result);
+            Table.Persone.UpdateMoney(mainViewModel.GetPlayer.ID, Result);
+            Table.Raffle.SetResult(ID_Raffle, Result);
             mainViewModel.GetBalance = mainViewModel.GetPlayer.Money;
 
             mainViewModel.LotteryWinNum = WinNum;

@@ -273,6 +273,8 @@ C:\DiskInDiske\Cloud\programming\Project\Fair Lottery 8.2\Fair Lottery\obj\Debug
 C:\DiskInDiske\Cloud\programming\Project\Fair Lottery 8.2\Fair Lottery\obj\Debug\MainWindow.g.cs
 C:\DiskInDiske\Cloud\programming\Project\Fair Lottery 8.2\Fair Lottery\obj\Debug\Pages\Authorization.g.cs
 C:\DiskInDiske\Cloud\programming\Project\Fair Lottery 8.2\Fair Lottery\obj\Debug\Pages\BottomPanel.g.cs
+C:\DiskInDiske\Cloud\programming\Project\Fair Lottery 8.2\Fair Lottery\obj\Debug\Pages\Games\Dice.g.cs
+C:\DiskInDiske\Cloud\programming\Project\Fair Lottery 8.2\Fair Lottery\obj\Debug\Pages\Games\Lottery.g.cs
 C:\DiskInDiske\Cloud\programming\Project\Fair Lottery 8.2\Fair Lottery\obj\Debug\Pages\Hall.g.cs
 C:\DiskInDiske\Cloud\programming\Project\Fair Lottery 8.2\Fair Lottery\obj\Debug\Pages\Player.g.cs
 C:\DiskInDiske\Cloud\programming\Project\Fair Lottery 8.2\Fair Lottery\obj\Debug\Pages\Registration.g.cs
@@ -284,6 +286,8 @@ C:\DiskInDiske\Cloud\programming\Project\Fair Lottery 8.2\Fair Lottery\obj\Debug
 C:\DiskInDiske\Cloud\programming\Project\Fair Lottery 8.2\Fair Lottery\obj\Debug\MainWindow.baml
 C:\DiskInDiske\Cloud\programming\Project\Fair Lottery 8.2\Fair Lottery\obj\Debug\Pages\Authorization.baml
 C:\DiskInDiske\Cloud\programming\Project\Fair Lottery 8.2\Fair Lottery\obj\Debug\Pages\BottomPanel.baml
+C:\DiskInDiske\Cloud\programming\Project\Fair Lottery 8.2\Fair Lottery\obj\Debug\Pages\Games\Dice.baml
+C:\DiskInDiske\Cloud\programming\Project\Fair Lottery 8.2\Fair Lottery\obj\Debug\Pages\Games\Lottery.baml
 C:\DiskInDiske\Cloud\programming\Project\Fair Lottery 8.2\Fair Lottery\obj\Debug\Pages\Hall.baml
 C:\DiskInDiske\Cloud\programming\Project\Fair Lottery 8.2\Fair Lottery\obj\Debug\Pages\Player.baml
 C:\DiskInDiske\Cloud\programming\Project\Fair Lottery 8.2\Fair Lottery\obj\Debug\Pages\Registration.baml
@@ -294,51 +298,3 @@ C:\DiskInDiske\Cloud\programming\Project\Fair Lottery 8.2\Fair Lottery\obj\Debug
 C:\DiskInDiske\Cloud\programming\Project\Fair Lottery 8.2\Fair Lottery\obj\Debug\Fair Lottery.csproj.CoreCompileInputs.cache
 C:\DiskInDiske\Cloud\programming\Project\Fair Lottery 8.2\Fair Lottery\obj\Debug\Fair Lottery.exe
 C:\DiskInDiske\Cloud\programming\Project\Fair Lottery 8.2\Fair Lottery\obj\Debug\Fair Lottery.pdb
-C:\DiskInDiske\Cloud\programming\Project\Fair Lottery 8.2\Fair Lottery\obj\Debug\Pages\Dice.g.cs
-C:\DiskInDiske\Cloud\programming\Project\Fair Lottery 8.2\Fair Lottery\obj\Debug\Pages\Lottery.g.cs
-C:\DiskInDiske\Cloud\programming\Project\Fair Lottery 8.2\Fair Lottery\obj\Debug\Pages\Dice.baml
-C:\DiskInDiske\Cloud\programming\Project\Fair Lottery 8.2\Fair Lottery\obj\Debug\Pages\Lottery.baml
-C:\Cloud\programming\Project\Fair Lottery 8.2\Fair Lottery\bin\Debug\Resource\if_caution_attention_person_user_account_profile_1083154.png
-C:\Cloud\programming\Project\Fair Lottery 8.2\Fair Lottery\bin\Debug\Resource\Dice_Five.png
-C:\Cloud\programming\Project\Fair Lottery 8.2\Fair Lottery\bin\Debug\Resource\Dice_Four.png
-C:\Cloud\programming\Project\Fair Lottery 8.2\Fair Lottery\bin\Debug\Resource\Dice_One.png
-C:\Cloud\programming\Project\Fair Lottery 8.2\Fair Lottery\bin\Debug\Resource\Dice_Six.png
-C:\Cloud\programming\Project\Fair Lottery 8.2\Fair Lottery\bin\Debug\Resource\Dice_Three.png
-C:\Cloud\programming\Project\Fair Lottery 8.2\Fair Lottery\bin\Debug\Resource\Dice_Two.png
-C:\Cloud\programming\Project\Fair Lottery 8.2\Fair Lottery\bin\Debug\Resource\up-and-down-arrows.png
-C:\Cloud\programming\Project\Fair Lottery 8.2\Fair Lottery\bin\Debug\Fair Lottery.exe.config
-C:\Cloud\programming\Project\Fair Lottery 8.2\Fair Lottery\bin\Debug\Fair Lottery.exe
-C:\Cloud\programming\Project\Fair Lottery 8.2\Fair Lottery\bin\Debug\Fair Lottery.pdb
-C:\Cloud\programming\Project\Fair Lottery 8.2\Fair Lottery\bin\Debug\System.Data.SQLite.dll
-C:\Cloud\programming\Project\Fair Lottery 8.2\Fair Lottery\bin\Debug\System.Data.SQLite.xml
-C:\Cloud\programming\Project\Fair Lottery 8.2\Fair Lottery\bin\Debug\System.Data.SQLite.dll.config
-C:\Cloud\programming\Project\Fair Lottery 8.2\Fair Lottery\obj\Debug\Fair Lottery.csprojAssemblyReference.cache
-C:\Cloud\programming\Project\Fair Lottery 8.2\Fair Lottery\obj\Debug\MainWindow.g.cs
-C:\Cloud\programming\Project\Fair Lottery 8.2\Fair Lottery\obj\Debug\Pages\Authorization.g.cs
-C:\Cloud\programming\Project\Fair Lottery 8.2\Fair Lottery\obj\Debug\Pages\BottomPanel.g.cs
-C:\Cloud\programming\Project\Fair Lottery 8.2\Fair Lottery\obj\Debug\Pages\Dice.g.cs
-C:\Cloud\programming\Project\Fair Lottery 8.2\Fair Lottery\obj\Debug\Pages\Hall.g.cs
-C:\Cloud\programming\Project\Fair Lottery 8.2\Fair Lottery\obj\Debug\Pages\Lottery.g.cs
-C:\Cloud\programming\Project\Fair Lottery 8.2\Fair Lottery\obj\Debug\Pages\Player.g.cs
-C:\Cloud\programming\Project\Fair Lottery 8.2\Fair Lottery\obj\Debug\Pages\Registration.g.cs
-C:\Cloud\programming\Project\Fair Lottery 8.2\Fair Lottery\obj\Debug\Pages\TopPanel.g.cs
-C:\Cloud\programming\Project\Fair Lottery 8.2\Fair Lottery\obj\Debug\App.g.cs
-C:\Cloud\programming\Project\Fair Lottery 8.2\Fair Lottery\obj\Debug\GeneratedInternalTypeHelper.g.cs
-C:\Cloud\programming\Project\Fair Lottery 8.2\Fair Lottery\obj\Debug\Fair Lottery_MarkupCompile.cache
-C:\Cloud\programming\Project\Fair Lottery 8.2\Fair Lottery\obj\Debug\Fair Lottery_MarkupCompile.lref
-C:\Cloud\programming\Project\Fair Lottery 8.2\Fair Lottery\obj\Debug\MainWindow.baml
-C:\Cloud\programming\Project\Fair Lottery 8.2\Fair Lottery\obj\Debug\Pages\Authorization.baml
-C:\Cloud\programming\Project\Fair Lottery 8.2\Fair Lottery\obj\Debug\Pages\BottomPanel.baml
-C:\Cloud\programming\Project\Fair Lottery 8.2\Fair Lottery\obj\Debug\Pages\Dice.baml
-C:\Cloud\programming\Project\Fair Lottery 8.2\Fair Lottery\obj\Debug\Pages\Hall.baml
-C:\Cloud\programming\Project\Fair Lottery 8.2\Fair Lottery\obj\Debug\Pages\Lottery.baml
-C:\Cloud\programming\Project\Fair Lottery 8.2\Fair Lottery\obj\Debug\Pages\Player.baml
-C:\Cloud\programming\Project\Fair Lottery 8.2\Fair Lottery\obj\Debug\Pages\Registration.baml
-C:\Cloud\programming\Project\Fair Lottery 8.2\Fair Lottery\obj\Debug\Pages\TopPanel.baml
-C:\Cloud\programming\Project\Fair Lottery 8.2\Fair Lottery\obj\Debug\Fair Lottery.g.resources
-C:\Cloud\programming\Project\Fair Lottery 8.2\Fair Lottery\obj\Debug\Fair_Lottery.Properties.Resources.resources
-C:\Cloud\programming\Project\Fair Lottery 8.2\Fair Lottery\obj\Debug\Fair Lottery.csproj.GenerateResource.cache
-C:\Cloud\programming\Project\Fair Lottery 8.2\Fair Lottery\obj\Debug\Fair Lottery.csproj.CoreCompileInputs.cache
-C:\Cloud\programming\Project\Fair Lottery 8.2\Fair Lottery\obj\Debug\Fair Lottery.csproj.CopyComplete
-C:\Cloud\programming\Project\Fair Lottery 8.2\Fair Lottery\obj\Debug\Fair Lottery.exe
-C:\Cloud\programming\Project\Fair Lottery 8.2\Fair Lottery\obj\Debug\Fair Lottery.pdb

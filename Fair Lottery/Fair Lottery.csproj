@@ -60,12 +60,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Pages\Dice.xaml.cs">
-      <DependentUpon>Dice.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\Lottery.xaml.cs">
-      <DependentUpon>Lottery.xaml</DependentUpon>
-    </Compile>
     <Compile Include="ViewModel\DiceViewModel.cs" />
     <Compile Include="ViewModel\LotteryViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
@@ -92,15 +86,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\Dice.xaml">
+    <Page Include="Pages\Games\Dice.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Games\Lottery.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\Hall.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\Lottery.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -123,6 +117,12 @@
     </Compile>
     <Compile Include="Pages\BottomPanel.xaml.cs">
       <DependentUpon>BottomPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Games\Dice.xaml.cs">
+      <DependentUpon>Dice.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Games\Lottery.xaml.cs">
+      <DependentUpon>Lottery.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\Hall.xaml.cs">
       <DependentUpon>Hall.xaml</DependentUpon>
