@@ -8,6 +8,24 @@
       d:DesignHeight="600" d:DesignWidth="800"
       Title="Hall">
 
+    <Page.Resources>
+        <Style x:Key="testBtn" TargetType="Button">
+            <Style.Triggers>
+                
+                <EventTrigger RoutedEvent="MouseEnter">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard>
+                            <Storyboard Storyboard.TargetProperty="Background.Color">
+                                <ColorAnimation To="Red" Duration="0:0:0:10"></ColorAnimation>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+                
+            </Style.Triggers>
+        </Style>
+    </Page.Resources>
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
@@ -36,15 +54,19 @@
 
             <Button Grid.Row="0"
                     Grid.Column="0" 
-                    Background="#A9AAAC" 
+                    Background="#FE9505" 
+                    FontSize="30"
                     Name="ButtonLottery" 
-                    Click="StartLottery">
+                    Click="StartLottery"
+                    Style="{StaticResource testBtn}">
                 <TextBlock>Lottery</TextBlock>
             </Button>
             <Button Grid.Column="0" Grid.Row="1"
-                    Background="#A9AAAC" 
-                    Name="ButtonDice" 
-                    Click="StartDice">
+                    Background="#FE9505" 
+                    Name="ButtonDice"
+                    FontSize="30"
+                    Click="StartDice"
+                    Style="{StaticResource testBtn}">
                 <TextBlock>Dice</TextBlock>
             </Button>
         </Grid>

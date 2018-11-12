@@ -50,11 +50,31 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <TextBox Grid.Column="0" FontSize="28" Name="InFirst" MaxLength="1" TextAlignment="Center"/>
-                <TextBox Grid.Column="2" FontSize="{Binding ElementName=InFirst,Path=FontSize}" Name="InSecond" MaxLength="1" TextAlignment="Center"/>
-                <TextBox Grid.Column="4" FontSize="{Binding ElementName=InFirst,Path=FontSize}" Name="InThird" MaxLength="1" TextAlignment="Center"/>
-                <TextBox Grid.Column="6" FontSize="{Binding ElementName=InFirst,Path=FontSize}" Name="InFourth" MaxLength="1" TextAlignment="Center"/>
-                <TextBox Grid.Column="8" FontSize="{Binding ElementName=InFirst,Path=FontSize}" Name="InFifth" MaxLength="1" TextAlignment="Center"/>
+                <TextBox Grid.Column="0" 
+                         FontSize="28"
+                         MaxLength="1" 
+                         TextAlignment="Center"
+                         Text="{Binding LotteryNumbers[0]}"/>
+                <TextBox Grid.Column="2" 
+                         FontSize="28" 
+                         MaxLength="1" 
+                         TextAlignment="Center"
+                         Text="{Binding LotteryNumbers[1]}"/>
+                <TextBox Grid.Column="4" 
+                         FontSize="28" 
+                         MaxLength="1" 
+                         TextAlignment="Center"
+                         Text="{Binding LotteryNumbers[2]}"/>
+                <TextBox Grid.Column="6" 
+                         FontSize="28" 
+                         MaxLength="1" 
+                         TextAlignment="Center"
+                         Text="{Binding LotteryNumbers[3]}"/>
+                <TextBox Grid.Column="8" 
+                         FontSize="28" 
+                         MaxLength="1" 
+                         TextAlignment="Center"
+                         Text="{Binding LotteryNumbers[4]}"/>
             </Grid>
 
             <Grid Grid.Row="1" Grid.Column="2">
@@ -63,10 +83,14 @@
                     <RowDefinition/>
                 </Grid.RowDefinitions>
 
-                <Button Grid.Row="0" Click="Button_Generate" Name="Generate">
+                <Button Grid.Row="0" 
+                        Command="{Binding LotteryGenerateNumber}"
+                        IsEnabled="{Binding LottryIsEnableElement}">
                     Сгенерировать
                 </Button>
-                <Button Grid.Row="1" Click="BuyTicket" Name="Buy">
+                <Button Grid.Row="1" 
+                        Command="{Binding LotteryBuyTicket}"
+                        IsEnabled="{Binding LottryIsEnableElement}">
                     Купить билет
                 </Button>
             </Grid>
@@ -77,10 +101,20 @@
                     <ColumnDefinition Width="40"/>
                 </Grid.ColumnDefinitions>
                     
-                <Slider VerticalAlignment="Center" ValueChanged="Slider_ValueChanged" Name="SliderBuyFew" IsSnapToTickEnabled="True"/>
-                <Label Grid.Column="1" Name="SliderCount" Content="0" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15"/>
+                <Slider VerticalAlignment="Center" 
+                        IsSnapToTickEnabled="True"
+                        Value="{Binding LotterySlider}"
+                        Maximum="{Binding LotterySliderMaximum}"/>
+                <Label Grid.Column="1"  
+                       Content="{Binding LotterySlider}" 
+                       VerticalAlignment="Center" 
+                       HorizontalAlignment="Center" 
+                       FontSize="15"/>
             </Grid>
-            <Button Grid.Column="2" Grid.Row="3" Click="BuyFew" Name="buyFew">
+            <Button Grid.Column="2" 
+                    Grid.Row="3" 
+                    Command="{Binding LotteryBuyFew}"
+                    IsEnabled="{Binding LottryIsEnableElement}">
                 <TextBlock TextWrapping="Wrap" TextAlignment="Center">
                     Купить несколько случайных билетов
                 </TextBlock>
@@ -96,15 +130,28 @@
                 <Label Grid.Column="1" Content="0"/>
             </Grid>
 
-            <Button Grid.Row="5" Grid.Column="2" Content="Розыгрыш" Click="Button_Raffle" Name="raffle"/>
+            <Button Grid.Row="5" 
+                    Grid.Column="2" 
+                    Content="Розыгрыш" 
+                    Command="{Binding LotteryRaffle}"
+                    IsEnabled="{Binding LottryIsEnableElement}"/>
 
-            <Label Grid.Row="7" Grid.Column="1" Visibility="Hidden" Name="TextWin" FontSize="21">
+            <Label Grid.Row="7" 
+                   Grid.Column="1" 
+                   Visibility="{Binding LotteryVisibilityHiddenElement}" 
+                   FontSize="21">
                 Выйграл билет под номером:
             </Label>
 
-            <Label Grid.Row="7" Grid.Column="2" Name="winNum" Visibility="Hidden" FontSize="26"/>
+            <Label Grid.Row="7" 
+                   Grid.Column="2"
+                   Visibility="{Binding LotteryVisibilityHiddenElement}" 
+                   FontSize="26"
+                   Content="{Binding LotteryWinNum}"/>
 
-            <Grid Grid.Row="9" Grid.Column="1" Name="blabla" Visibility="Hidden">
+            <Grid Grid.Row="9" 
+                  Grid.Column="1" 
+                  Visibility="{Binding LotteryVisibilityHiddenElement}">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="152"/>
                     <ColumnDefinition Width="2*"/>
@@ -120,12 +167,32 @@
                 <Label Grid.Row="1" Content="Затраты на билеты:" FontSize="16"/>
                 <Label Grid.Row="2" Content="Итог:" FontSize="24"/>
 
-                <TextBlock Grid.Column="1" Grid.Row="0" Name="winnings" FontSize="16"/>
-                <TextBlock Grid.Column="1" Grid.Row="1" Name="Buys" FontSize="16"/>
-                <TextBlock Grid.Column="1" Grid.Row="2" Name="result" FontSize="24"/>
+                <TextBlock Grid.Column="1" 
+                           Grid.Row="0" 
+                           FontSize="16"
+                           Text="{Binding LotteryWinnings}"/>
+                <TextBlock Grid.Column="1" 
+                           Grid.Row="1" 
+                           Text="{Binding LotteryCosts}"
+                           FontSize="16"/>
+                <TextBlock Grid.Column="1" 
+                           Grid.Row="2" 
+                           Text="{Binding LottryResult}"
+                           FontSize="24"/>
             </Grid>
 
-            <Button Grid.Column="2" Grid.Row="9" Name="PlayAgain" Visibility="Hidden" Height="50" Content="Играть еще" Click="Restart_Click"/>
+            <Button Grid.Column="2" 
+                    Grid.Row="9" 
+                    Visibility="{Binding LotteryVisibilityHiddenElement}" 
+                    Height="50"
+                    Content="Играть еще" 
+                    Command="{Binding LotteryRestart}"/>
+            <Button Grid.Column="2" 
+                    Grid.Row="9" 
+                    Visibility="{Binding LotteryVisibilityHiddenElement}" 
+                    Height="50"
+                    Content="Закрыть" 
+                    Command="{Binding GameDie}" Margin="0,0,0,-105"/>
         </Grid>
 
         <Grid Grid.Column="2" Grid.Row="0">
@@ -137,9 +204,10 @@
             <Label HorizontalAlignment="Center" FontSize="16">
                 Купленные
             </Label>
-            <StackPanel Grid.Row="1" Name="StackTickets">
-                <!--Тут будут купленные билеты-->
-                </StackPanel>
+            <ListBox Grid.Row="1" 
+                     Background="#36393E" 
+                     BorderThickness="0"
+                     ItemsSource="{Binding PurchasedTickets, Mode=TwoWay}"/>
         </Grid>
     </Grid>
 </Page>

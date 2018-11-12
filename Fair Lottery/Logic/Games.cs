@@ -8,36 +8,41 @@ using System.Windows;
 
 namespace Fair_Lottery.Logic
 {
-    class Dice : Pages.Games.Dice
+    interface Game
+    {
+
+    }
+    class Dice : Game
     {
         private MainViewModel mainViewModel;
         private static int ID_Name = 2;
-        private double Probability = 0;
-        private decimal[] Rates = new decimal[6] { 0, 0, 0, 0, 0, 0 };
 
         public Dice(MainViewModel mainViewModel)
         {
-            DataContext = this.mainViewModel = mainViewModel;
-            InitializeComponent();
+            this.mainViewModel = mainViewModel;
 
-            (DataContext as MainViewModel).Balance = Math.Round(mainViewModel.VMPlayer.Money, 1);
-            Slider.Maximum = Convert.ToDouble(mainViewModel.VMPlayer.Money);
+            mainViewModel.Balance = Math.Round(mainViewModel.VMPlayer.Money, 1);
+            mainViewModel.DiceSliderMaximum = Convert.ToDouble(mainViewModel.VMPlayer.Money);
         }
-        public override void MakeBet(object sender, RoutedEventArgs e)
+        public void MakeBet(object obj)
         {
             decimal result = 0;
             decimal Ratio = 3;
             int WinNum = new Random(DateTime.Now.Millisecond).Next(1, 6);
             int ID_Raffle = Table.Raffle.CreateRaffle(mainViewModel.VMPlayer.ID, WinNum, ID_Name);
             int[] ID = new int[6] { 1, 2, 3, 4, 5, 6 };
-            System.Windows.Controls.Primitives.ToggleButton[] buttons = new System.Windows.Controls.Primitives.ToggleButton[6] { One, Two, Three, Four, Five, Six };
-
+            string[] buttons = new string[6] { "pack://siteoforigin:,,,/Resource/Dice_One.png",
+                                             "pack://siteoforigin:,,,/Resource/Dice_Two.png",
+                                             "pack://siteoforigin:,,,/Resource/Dice_Three.png",
+                                             "pack://siteoforigin:,,,/Resource/Dice_Four.png",
+                                             "pack://siteoforigin:,,,/Resource/Dice_Five.png",
+                                             "pack://siteoforigin:,,,/Resource/Dice_Six.png" };
             for (int i = 0; i < 6; i++)
-                if (Rates[i] > 0)
+                if (mainViewModel.Rates[i] > 0)
                 {
-                    Table.Bet.CreateBet(ID[i], ID_Raffle, Rates[i], ID[i]);
-                    result -= Rates[i];
-                    result += (WinNum == ID[i]) ? Rates[i] * Ratio : 0;
+                    Table.Bet.CreateBet(ID[i], ID_Raffle, mainViewModel.Rates[i], ID[i]);
+                    result -= mainViewModel.Rates[i];
+                    result += (WinNum == ID[i]) ? mainViewModel.Rates[i] * Ratio : 0;
                 }
 
             if (mainViewModel.VMPlayer is Persone)
@@ -49,95 +54,68 @@ namespace Fair_Lottery.Logic
             {
                 (mainViewModel.VMPlayer as Guest).Money += result;
             }
-            mainViewModel.Balance = mainViewModel.VMPlayer.Money;
             Table.Raffle.SetResult(ID_Raffle, result);
 
-            WinImage.Source = new System.Windows.Media.Imaging.BitmapImage(new Uri(buttons[WinNum - 1].Tag.ToString()));
-            Start.IsEnabled = false;
-            (sender as System.Windows.Controls.Button).IsEnabled = false;
-            Result.Content = result;
-            (DataContext as MainViewModel).Balance = Math.Round(mainViewModel.VMPlayer.Money, 1);
+            mainViewModel.WinImageSource = buttons[WinNum - 1];
+            mainViewModel.Result = result.ToString();
+            mainViewModel.Balance = Math.Round(mainViewModel.VMPlayer.Money, 1);
 
-            WinLabImag.Visibility = Visibility.Visible;
-            TextResult.Visibility = Visibility.Visible;
-            Result.Visibility = Visibility.Visible;
-            Restart.Visibility = Visibility.Visible;
+            mainViewModel.DiceIsEnableElement = false;
+            mainViewModel.DiceVisibilityHiddenElement = Visibility.Visible;
         }
-        public override void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        public void Buy(object obj)
         {
-            Money.Content = e.NewValue;
-        }
-        public override void Restart_Click(object sender, RoutedEventArgs e)
-        {
-            mainViewModel.ActuallyBody = new Dice(mainViewModel);
-        }
-        public override void Buy(object sender, RoutedEventArgs e)
-        {
-            System.Windows.Controls.Primitives.ToggleButton[] buttons = new System.Windows.Controls.Primitives.ToggleButton[6] { One, Two, Three, Four, Five, Six };
-            System.Windows.Controls.TextBlock[] textBlocks = new System.Windows.Controls.TextBlock[6] { RateOne, RateTwo, RateThree, RateFour, RateFive, RateSix };
-            Probability = 0;
+            bool[] Checkbuttons = mainViewModel.IsCheckedButtons;
+            mainViewModel.DiceProbability = "0";
             for (int i = 0; i < 6; i++)
-                if ((bool)buttons[i].IsChecked)
+                if (Checkbuttons[i])
                 {
-                    Rates[i] += Convert.ToDecimal(Slider.Value);
-                    textBlocks[i].Text = (Convert.ToDecimal(textBlocks[i].Text) + Convert.ToDecimal(Slider.Value)).ToString();
-                    (DataContext as MainViewModel).Balance = (DataContext as MainViewModel).Balance - Convert.ToDecimal(Slider.Value);
-                    Probability += (1.0 / 6);
+                    mainViewModel.Rates[i] += Convert.ToDecimal(mainViewModel.DiceSlider);
+                    mainViewModel.OnPropertyChanged("Rates");
+                    mainViewModel.Balance -= Convert.ToDecimal(mainViewModel.DiceSlider);
+                    mainViewModel.DiceProbability = (Convert.ToDouble(mainViewModel.DiceProbability) + (1.0 / 6)).ToString();
                 }
-            probability.Content = Math.Round(Probability * 100, 1) + "%";
+            mainViewModel.DiceProbability = Math.Round(Convert.ToDouble(mainViewModel.DiceProbability) * 100, 1) + "%";
         }
     }
-    class Lottery : Pages.Games.Lottery
+
+    class Lottery : Game
     {
         private MainViewModel mainViewModel;
         private static int ID_Name = 1;
         private decimal price;
         private decimal Bet;
 
-        private List<int> Tickets = new List<int>();
-        private List<int> Rest = new List<int>();
+        System.Collections.ObjectModel.ObservableCollection<int> Tickets = new System.Collections.ObjectModel.ObservableCollection<int>();
+        System.Collections.ObjectModel.ObservableCollection<int> Rest = new System.Collections.ObjectModel.ObservableCollection<int>();
 
         public Lottery(MainViewModel mainViewModel)
         {
-            DataContext = this.mainViewModel = mainViewModel;
-            InitializeComponent();
+            this.mainViewModel = mainViewModel;
             this.mainViewModel.VMPlayer = mainViewModel.VMPlayer;
 
             for (int i = 0; i < 100000; i++)
                 Rest.Add(i);
 
-            (DataContext as MainViewModel).Balance = mainViewModel.VMPlayer.Money;
+            mainViewModel.Balance = mainViewModel.VMPlayer.Money;
             price = 1;
             Bet = 0;
-            SliderBuyFew.Maximum = Convert.ToDouble(mainViewModel.VMPlayer.Money / price);
+            mainViewModel.LotterySliderMaximum = Convert.ToDouble(mainViewModel.VMPlayer.Money / price);
         }
-        private void ShowLast()
+        public void BuyFew(object obj)
         {
-            int Count = (Tickets.Count() < 20) ? Tickets.Count() : 20;
-            for (int i = 0; i < Count; i++)
-            {
-                System.Windows.Controls.Label label = new System.Windows.Controls.Label();
-                label.Height = 30;
-                label.FontSize = 14;
-                label.HorizontalAlignment = HorizontalAlignment.Center;
-                label.Content = Tickets[Tickets.Count - i - 1];
-                StackTickets.Children.Add(label);
-            }
-        }
-        public override void BuyFew(object sender, RoutedEventArgs e)
-        {
-            for (int i = 0, n; i < SliderBuyFew.Value; i++)
+            for (int i = 0, n; i < mainViewModel.LotterySlider; i++)
             {
                 n = GeneratorFreeTickets(i);
                 Tickets.Add(Rest[n]);
                 Rest.RemoveAt(n);
             }
-            Bet += price * Convert.ToDecimal(SliderBuyFew.Value);
-            (DataContext as MainViewModel).Balance = mainViewModel.VMPlayer.Money - Bet;
-            SliderBuyFew.Maximum = Convert.ToDouble(mainViewModel.VMPlayer.Money - Bet);
-            ShowLast();
+            Bet += price * Convert.ToDecimal(mainViewModel.LotterySlider);
+            mainViewModel.Balance = mainViewModel.VMPlayer.Money - Bet;
+            mainViewModel.LotterySliderMaximum = Convert.ToDouble(mainViewModel.VMPlayer.Money - Bet);
+            mainViewModel.PurchasedTickets = Tickets;
         }
-        public override void Button_Raffle(object sender, RoutedEventArgs e)
+        public void Button_Raffle(object obj)
         {
             int WinNum = new Random(DateTime.Now.Millisecond).Next(0, 99999);
             int ID_Raffle = Table.Raffle.CreateRaffle(mainViewModel.VMPlayer.ID, WinNum, ID_Name);
@@ -154,24 +132,18 @@ namespace Fair_Lottery.Logic
             Table.Raffle.SetResult(ID_Raffle, Result);
             mainViewModel.Balance = mainViewModel.VMPlayer.Money;
 
-            winNum.Content = WinNum.ToString();
-            winnings.Text = (Result + Bet).ToString();
-            Buys.Text = Bet.ToString();
-            result.Text = Result.ToString();
+            mainViewModel.LotteryWinNum = WinNum;
+            mainViewModel.LotteryWinnings = Result + Bet;
+            mainViewModel.LotteryCosts = Bet;
+            mainViewModel.LottryResult = Result;
 
-            buyFew.IsEnabled = false;
-            Generate.IsEnabled = false;
-            Buy.IsEnabled = false;
-            raffle.IsEnabled = false;
+            mainViewModel.LottryIsEnableElement = false;
 
-            TextWin.Visibility = Visibility.Visible;
-            winNum.Visibility = Visibility.Visible;
-            PlayAgain.Visibility = Visibility.Visible;
-            blabla.Visibility = Visibility.Visible;
+            mainViewModel.LotteryVisibilityHiddenElement = Visibility.Visible;
         }
-        public override void BuyTicket(object sender, RoutedEventArgs e)
+        public void BuyTicket(object obj)
         {
-            string str = InFirst.Text + InSecond.Text + InThird.Text + InFourth.Text + InFifth.Text;
+            string str = string.Join(null, mainViewModel.LotteryNumbers);
             if (str == "") str = "00000";
             int Num = Convert.ToInt32(str);
             if (Tickets.Where(n => n == Num).Count() > 0)
@@ -188,30 +160,22 @@ namespace Fair_Lottery.Logic
                 Tickets.Add(Num);
                 Rest.Remove(Num);
                 Bet += price;
-                (DataContext as MainViewModel).Balance = mainViewModel.VMPlayer.Money - Bet;
-                SliderBuyFew.Maximum = Convert.ToDouble(mainViewModel.VMPlayer.Money - Bet);
+                mainViewModel.Balance = mainViewModel.VMPlayer.Money - Bet;
+                mainViewModel.LotterySliderMaximum = Convert.ToDouble(mainViewModel.VMPlayer.Money - Bet);
             }
-            ShowLast();
-            InFirst.Text = InSecond.Text = InThird.Text = InFourth.Text = InFifth.Text = "";
+            mainViewModel.PurchasedTickets = Tickets;
+            mainViewModel.LotteryNumbers = new string[] { "", "", "", "", "",};
         }
-        public override void Button_Generate(object sender, RoutedEventArgs e)
+        public void Button_Generate(object obj)
         {
-            System.Windows.Controls.TextBox[] textBoxs = new System.Windows.Controls.TextBox[5] { InFirst, InSecond, InThird, InFourth, InFifth };
             char[] mas = GeneratorFreeTickets().ToString().ToCharArray();
             for (int i = 0; i < 5; i++)
-                textBoxs[i].Text = (mas.Count() > i) ? mas[i].ToString() : "0";
+                mainViewModel.LotteryNumbers[i] = (mas.Count() > i) ? mas[i].ToString() : "0";
+            mainViewModel.OnPropertyChanged("LotteryNumbers");
         }
         private int GeneratorFreeTickets(int step = 0)
         {
             return new Random(DateTime.Now.Millisecond + step).Next(0, Rest.Count() - 1);
-        }
-        public override void Restart_Click(object sender, RoutedEventArgs e)
-        {
-            mainViewModel.ActuallyBody = new Lottery(mainViewModel);
-        }
-        public override void Slider_ValueChanged(object sender, RoutedEventArgs e)
-        {
-            SliderCount.Content = SliderBuyFew.Value;
         }
     }
     struct GameInfo

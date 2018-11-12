@@ -15,12 +15,12 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition />
-            <RowDefinition Height="20px"/>
+            <RowDefinition Height="25px"/>
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.25*"/>
-            <ColumnDefinition Width="20px"/>
+            <ColumnDefinition Width="25px"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
@@ -33,7 +33,7 @@
                             <DoubleAnimation Storyboard.TargetProperty="Height"
                                              From="0"
                                              To="60"
-                                             Duration="0:0:0:1"
+                                             Duration="0:0:0:1.5"
                                              DecelerationRatio="1"/>
                         </Storyboard>
                     </BeginStoryboard>
@@ -46,7 +46,15 @@
                Content="{Binding ActuallyBody, Mode=TwoWay}"
                NavigationUIVisibility="Hidden"/>
 
-        <Button Grid.Column="1" Grid.Row="2" Click="SkipBot"/>
+        <Button Grid.Column="1" 
+                Grid.Row="2" 
+                Click="SkipBot" 
+                BorderThickness="0"
+                Background="#36393E">
+            
+            <Image Source="pack://siteoforigin:,,,/Resource/up-and-down-arrows.png"/>
+            
+        </Button>
 
         <Frame Grid.ColumnSpan="4" Grid.Row="3" Content="{Binding ActuallyBottom, Mode=TwoWay}" Name="Bot">
             <Frame.Triggers>
@@ -57,7 +65,7 @@
                             <DoubleAnimation Storyboard.TargetProperty="Height"
                                              From="0"
                                              To="60"
-                                             Duration="0:0:0:1"
+                                             Duration="0:0:0:1.5"
                                              DecelerationRatio="1"/>
                         </Storyboard>
                     </BeginStoryboard>

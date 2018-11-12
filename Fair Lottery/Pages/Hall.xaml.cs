@@ -25,13 +25,12 @@ namespace Fair_Lottery.Pages
 
         private void StartLottery(object sender, RoutedEventArgs e)
         {
-            (DataContext as MainViewModel).ActuallyBody = new Logic.Lottery(DataContext as MainViewModel);
+            (DataContext as MainViewModel).Game = new Logic.Lottery(DataContext as MainViewModel);
         }
 
         private void StartDice(object sender, RoutedEventArgs e)
         {
-            (DataContext as MainViewModel).ActuallyBody = new Logic.Dice(DataContext as MainViewModel);
+            (DataContext as MainViewModel).Game = new Logic.Dice(DataContext as MainViewModel);
         }
-
     }
 }

@@ -22,15 +22,5 @@ namespace Fair_Lottery.Pages
             InitializeComponent();
             DataContext = mainViewModel;
         }
-
-        private void ReturnHome(object sender, RoutedEventArgs e)
-        {
-            (DataContext as MainViewModel).ActuallyBody = new Hall(DataContext as MainViewModel);
-        }
-
-        private void ReturnPlayer(object sender, RoutedEventArgs e)
-        {
-            (DataContext as MainViewModel).ActuallyBody = new Player(DataContext as MainViewModel);
-        }
     }
 }

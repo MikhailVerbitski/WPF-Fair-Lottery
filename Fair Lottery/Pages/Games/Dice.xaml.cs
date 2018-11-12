@@ -17,34 +17,10 @@ namespace Fair_Lottery.Pages.Games
 {
     public partial class Dice : Page
     {
-        public Dice()
+        internal Dice(MainViewModel mainViewModel)
         {
             InitializeComponent();
-        }
-
-        public virtual void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
-        {
-
-        }
-        public virtual void CheckToggleButton(object sendler, EventArgs e)
-        {
-
-        }
-        public virtual void UncheckToggleButton(object sendler, EventArgs e)
-        {
-
-        }
-        public virtual void MakeBet(object sender, RoutedEventArgs e)
-        {
-
-        }
-        public virtual void Restart_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-        public virtual void Buy(object sender, RoutedEventArgs e)
-        {
-
+            DataContext = mainViewModel;
         }
     }
 }

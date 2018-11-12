@@ -10,21 +10,20 @@
 
     <Page.Resources>
         <Style TargetType="Button">
-            <Setter Property="Height" Value="50"/>
+            <Setter Property="Height" Value="60"/>
             <Setter Property="Background" Value="#A9AAAC"/>
             <Setter Property="Width" Value="120"/>
         </Style>
     </Page.Resources>
-    
-    <ListBox Background="#2F3136" BorderThickness="0">
+
+    <ListBox Background="#2F3136" 
+             BorderThickness="0" 
+             ItemsSource="{Binding BottomPanelButtons}">
+
         <ListBox.ItemsPanel>
             <ItemsPanelTemplate>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"/>
             </ItemsPanelTemplate>
         </ListBox.ItemsPanel>
-
-        <Button Grid.Column="1" Content="Home" Click="ReturnHome"/>
-
-        <Button Grid.Column="5" Content="Профиль" Click="ReturnPlayer"/>
     </ListBox>
 </Page>

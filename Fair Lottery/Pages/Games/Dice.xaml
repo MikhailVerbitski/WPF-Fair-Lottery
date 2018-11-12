@@ -8,6 +8,16 @@
       d:DesignHeight="400" d:DesignWidth="600"
       Title="Dice">
 
+    <Page.Resources>
+        <Style TargetType="ToggleButton">
+            <Setter Property="Background" Value="#2F4842"/>
+            <Setter Property="BorderThickness" Value="0"/>
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="Control.Background" Value="#412033"/>
+        </Style>
+    </Page.Resources>
+
     <Grid MinWidth="600" MinHeight="400">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.03*"/>
@@ -39,31 +49,67 @@
                 <RowDefinition Height="30"/>
             </Grid.RowDefinitions>
 
-            <ToggleButton Name="One" Grid.Column="0" Tag="pack://siteoforigin:,,,/Resource/Dice_One.jpg">
-                <Image Margin="3" Source="pack://siteoforigin:,,,/Resource/Dice_One.jpg" />
+            <ToggleButton Grid.Column="0"
+                          IsChecked="{Binding IsCheckedButtons[0]}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="0.75*"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition Height="0.75*"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    
+                    <Image Grid.Column="1"
+                           Grid.Row="1"
+                           Source="pack://siteoforigin:,,,/Resource/Dice_One.png" />
+                </Grid>
             </ToggleButton>
-            <ToggleButton Name="Two" Grid.Column="2" Tag="pack://siteoforigin:,,,/Resource/Dice_Two.jpg">
-                <Image Margin="3" Source="pack://siteoforigin:,,,/Resource/Dice_Two.jpg" />
+            <ToggleButton Grid.Column="2"
+                          IsChecked="{Binding IsCheckedButtons[1]}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="4.6*"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition Height="4.6*"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <Image Grid.Column="1"
+                           Grid.Row="1"
+                           Source="pack://siteoforigin:,,,/Resource/Dice_Two.png" />
+                </Grid>
             </ToggleButton>
-            <ToggleButton Name="Three" Grid.Column="4" Tag="pack://siteoforigin:,,,/Resource/Dice_Three.jpg">
-                <Image Margin="3" Source="pack://siteoforigin:,,,/Resource/Dice_Three.jpg"/>
+            <ToggleButton Grid.Column="4"
+                          IsChecked="{Binding IsCheckedButtons[2]}">
+                <Image Margin="3" Source="pack://siteoforigin:,,,/Resource/Dice_Three.png"/>
             </ToggleButton>
-            <ToggleButton Name="Four" Grid.Column="6" Tag="pack://siteoforigin:,,,/Resource/Dice_Four.jpg">
-                <Image Margin="3" Source="pack://siteoforigin:,,,/Resource/Dice_Four.jpg"/>
+            <ToggleButton Grid.Column="6" 
+                          IsChecked="{Binding IsCheckedButtons[3]}">
+                <Image Margin="3" Source="pack://siteoforigin:,,,/Resource/Dice_Four.png"/>
             </ToggleButton>
-            <ToggleButton Name="Five" Grid.Column="8" Tag="pack://siteoforigin:,,,/Resource/Dice_Five.jpg">
-                <Image Margin="3" Source="pack://siteoforigin:,,,/Resource/Dice_Five.jpg"/>
+            <ToggleButton Grid.Column="8" 
+                          IsChecked="{Binding IsCheckedButtons[4]}">
+                <Image Margin="3" Source="pack://siteoforigin:,,,/Resource/Dice_Five.png"/>
             </ToggleButton>
-            <ToggleButton Name="Six" Grid.Column="10" Tag="pack://siteoforigin:,,,/Resource/Dice_Six.jpg">
-                <Image Margin="3" Source="pack://siteoforigin:,,,/Resource/Dice_Six.jpg"/>
+            <ToggleButton Grid.Column="10" 
+                          IsChecked="{Binding IsCheckedButtons[5]}">
+                <Image Margin="3" Source="pack://siteoforigin:,,,/Resource/Dice_Six.png"/>
             </ToggleButton>
 
-            <TextBlock Grid.Row="1" Grid.Column="0" Name="RateOne" Text="0" HorizontalAlignment="Center" FontSize="18"/>
-            <TextBlock Grid.Row="1" Grid.Column="2" Name="RateTwo" Text="0" HorizontalAlignment="Center" FontSize="18"/>
-            <TextBlock Grid.Row="1" Grid.Column="4" Name="RateThree" Text="0" HorizontalAlignment="Center" FontSize="18"/>
-            <TextBlock Grid.Row="1" Grid.Column="6" Name="RateFour" Text="0" HorizontalAlignment="Center" FontSize="18"/>
-            <TextBlock Grid.Row="1" Grid.Column="8" Name="RateFive" Text="0" HorizontalAlignment="Center" FontSize="18"/>
-            <TextBlock Grid.Row="1" Grid.Column="10" Name="RateSix" Text="0" HorizontalAlignment="Center" FontSize="18"/>
+            <TextBlock Grid.Row="1" Grid.Column="0" Text="{Binding Rates[0], Mode=TwoWay}" HorizontalAlignment="Center" FontSize="18"/>
+            <TextBlock Grid.Row="1" Grid.Column="2" Text="{Binding Rates[1], Mode=TwoWay}" HorizontalAlignment="Center" FontSize="18"/>
+            <TextBlock Grid.Row="1" Grid.Column="4" Text="{Binding Rates[2], Mode=TwoWay}" HorizontalAlignment="Center" FontSize="18"/>
+            <TextBlock Grid.Row="1" Grid.Column="6" Text="{Binding Rates[3], Mode=TwoWay}" HorizontalAlignment="Center" FontSize="18"/>
+            <TextBlock Grid.Row="1" Grid.Column="8" Text="{Binding Rates[4], Mode=TwoWay}" HorizontalAlignment="Center" FontSize="18"/>
+            <TextBlock Grid.Row="1" Grid.Column="10" Text="{Binding Rates[5], Mode=TwoWay}" HorizontalAlignment="Center" FontSize="18"/>
         </Grid>
 
         <Grid Grid.Column="1" Grid.Row="1">
@@ -90,8 +136,14 @@
                     <RowDefinition Height="40"/>
                 </Grid.RowDefinitions>
 
-                <Label Grid.Column="0" Grid.Row="0" Content="Сделайте ставку!"/>
-                <Slider Grid.Column="0" Grid.Row="1" Name="Slider" ValueChanged="Slider_ValueChanged" IsSnapToTickEnabled="True"/>
+                <Label Grid.Column="0" 
+                       Grid.Row="0" 
+                       Content="Сделайте ставку!"/>
+                <Slider Grid.Column="0" 
+                        Grid.Row="1"
+                        Value="{Binding DiceSlider}"
+                        Maximum="{Binding DiceSliderMaximum}"
+                        IsSnapToTickEnabled="True"/>
 
                 <Grid Grid.Column="0" Grid.Row="2">
                     <Grid.ColumnDefinitions>
@@ -99,20 +151,37 @@
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
 
-                    <Label Grid.Column="0" Name="Money" Content="0"/>
-                    <Button Grid.Column="1" Name="Start" Content="Купить!" Click="Buy"/>
+                    <Label Grid.Column="0" Content="{Binding DiceSlider}"/>
+                    <Button Grid.Column="1" 
+                            IsEnabled="{Binding IsEnableElement}"
+                            Content="Купить!" 
+                            Command="{Binding DiceBuy}"/>
                 </Grid>
 
-                <Button Grid.Column="0" Grid.Row="4" Content="Играть" Click="MakeBet"/>
+                <Button Grid.Column="0" 
+                        Grid.Row="4"
+                        IsEnabled="{Binding IsEnableElement}"
+                        Content="Играть" 
+                        Command="{Binding DiceMakeBet}"/>
 
-                <Grid Grid.Column="0" Grid.Row="6">
+                <Grid Grid.Column="0" 
+                      Grid.Row="6">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="1.4*"/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
 
-                    <Label Grid.Column="0" Grid.Row="3" Name="TextResult" Visibility="Hidden" FontSize="16" Foreground="Green" Content="Ваш Выйгрыш:"/>
-                    <Label Grid.Column="1" Grid.Row="3" Name="Result" Visibility="Hidden" />
+                    <Label Grid.Column="0" 
+                           Grid.Row="3" 
+                           Visibility="{Binding DiceVisibilityHiddenElement}" 
+                           FontSize="24" 
+                           Foreground="Green" 
+                           Content="Ваш Выйгрыш:"/>
+                    <Label Grid.Column="1" 
+                           Grid.Row="3" 
+                           Content="{Binding Result}"
+                           FontSize="28"
+                           Visibility="{Binding DiceVisibilityHiddenElement}" />
                 </Grid>
             </Grid>
 
@@ -131,7 +200,7 @@
                     </Grid.ColumnDefinitions>
 
                     <Label Grid.Column="0" Content="Вероятность выйгрыша:"/>
-                    <Label Grid.Column="1" Name="probability" Content="0"/>
+                    <Label Grid.Column="1" Content="{Binding DiceProbability}"/>
                 </Grid>
 
                 <Grid Grid.Row="1">
@@ -140,11 +209,20 @@
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
 
-                    <Label Grid.Column="0" Name="WinLabImag" Visibility="Hidden" Content="Выпала сторона:"/>
-                    <Image Name="WinImage" Grid.Column="1"/>
+                    <Label Grid.Column="0" 
+                           Visibility="{Binding DiceVisibilityHiddenElement}" 
+                           Content="Выпала сторона:"/>
+                    <Image Source="{Binding WinImageSource}" Grid.Column="1"/>
                 </Grid>
 
-                <Button Grid.Row="2" Name="Restart" Background="White" Content="Играть еще" Visibility="Hidden" Click="Restart_Click"/>
+                <Button Grid.Row="2" 
+                        Content="Играть еще" 
+                        Visibility="{Binding DiceVisibilityHiddenElement}" 
+                        Command="{Binding DiceRestart}"/>
+                <Button Grid.Row="3" 
+                        Content="Закрыть" 
+                        Visibility="{Binding DiceVisibilityHiddenElement}" 
+                        Command="{Binding GameDie}"/>
             </Grid>
         </Grid>
     </Grid>

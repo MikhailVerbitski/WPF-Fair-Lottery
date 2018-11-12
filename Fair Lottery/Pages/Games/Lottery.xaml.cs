@@ -17,33 +17,10 @@ namespace Fair_Lottery.Pages.Games
 {
     public partial class Lottery : Page
     {
-        public Lottery()
+        internal Lottery(MainViewModel mainViewModel)
         {
             InitializeComponent();
-        }
-        public virtual void BuyTicket(object sender, RoutedEventArgs e)
-        {
-
-        }
-        public virtual void Button_Generate(object sender, RoutedEventArgs e)
-        {
-
-        }
-        public virtual void Button_Raffle(object sender, RoutedEventArgs e)
-        {
-
-        }
-        public virtual void Restart_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-        public virtual void Slider_ValueChanged(object sender, RoutedEventArgs e)
-        {
-
-        }
-        public virtual void BuyFew(object sender, RoutedEventArgs e)
-        {
-
+            DataContext = mainViewModel;
         }
     }
 }
